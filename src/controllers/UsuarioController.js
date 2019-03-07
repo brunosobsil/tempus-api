@@ -1,13 +1,21 @@
+const Usuario = require('../model/entities/Usuario');
+const UsuarioBO = require('../model/bo/UsuarioBO');
+
 class UsuarioController {
     
-    obterUsuario(req, res){
+    async obterUsuario(req, res){
         
         if(req.params.id){
            // Obter usuario por ID 
-           res.send('obter usuario por id')
+           let usuario = new Usuario();
+           usuario.id = req.params.id;
+           usuario = await UsuarioBO.obterUsuario(usuario);
+           res.send(usuario);
+
         }else{
             // Obter todos os usuarios
-            res.send('obter usuarios')
+            const usuarios = await UsuarioBO.obterUsuarios();
+            res.send(usuarios);
         }
         
     }
