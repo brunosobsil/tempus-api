@@ -14,7 +14,7 @@ class App {
     }
 
     routes(){
-        this.express.use(require('./src/routes/UsuarioRoute'));
+        require('./src/routes')(this.express);
     }
 
 }
