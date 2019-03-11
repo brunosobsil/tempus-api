@@ -2,31 +2,47 @@ const { Usuario } = require('../orm/models');
 
 class UsuarioDAO {
 
-    constructor(){
+    constructor() {
         Usuario.sync();
     }
 
-    async obterUsuario(usuario){
+    async obterUsuario(usuario) {
         const user = await Usuario.findById(usuario.id);
         return user;
     }
 
-    async obterUsuarios(){
+    async obterUsuarios() {
         const users = await Usuario.findAll();
-        return users; 
+        return users;
     }
 
-    async incluirUsuario(usuario){
-        await Usuario.create(usuario);
+    async incluirUsuario(usuario) {
+        await Usuario.create({
+            nome: usuario.nome,
+            endereco: usuario.endereco,
+            email: usuario.email,
+            status: usuario.status,
+            cpf: usuario.cpf,
+            perfil: usuario.perfil
+        });
     }
 
-    async alterarUsuario(usuario){
-        let user = this.obterUsuario(usuario);
-        await user.update(usuario);
+    async alterarUsuario(usuario) {
+        await Usuario.update({
+            nome: usuario.nome,
+            endereco: usuario.endereco,
+            email: usuario.email,
+            status: usuario.status,
+            cpf: usuario.cpf,
+            perfil: usuario.perfil
+        },
+        {   
+            where: { id: usuario.id }  
+        });
     }
 
-    async ativarDesativarUsuario(usuario){
-        let user = this.obterUsuario(usuario);
+    async ativarDesativarUsuario(usuario) {
+        let user = await this.obterUsuario(usuario);
         user.status = usuario.status;
         await user.save();
     }
