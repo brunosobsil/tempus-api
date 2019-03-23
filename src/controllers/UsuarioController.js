@@ -24,8 +24,10 @@ class UsuarioController {
 
         let usuario = new Usuario(null, req.body.nome, req.body.endereco, req.body.email, req.body.status, req.body.cpf, req.body.perfil);
         await UsuarioBO.incluirUsuario(usuario);
-        res.status(201);
-        res.send("Created");
+        res.status(201).json({
+            status: req.body.status,
+            message: 'usuario inserido com sucesso'
+        });
 
     }
 
@@ -41,8 +43,10 @@ class UsuarioController {
             await UsuarioBO.alterarUsuario(usuario);
         }
 
-        res.status(200);
-        res.send("Updated");
+        res.status(200).json({
+            status: req.body.status,
+            message: 'usuario atualizado com sucesso'
+        });
 
     }
 
