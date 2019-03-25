@@ -24,8 +24,10 @@ class HabilidadeController {
 
         let habilidade = new Habilidade(null, req.body.nome, req.body.descricao);
         await HabilidadeBO.incluirHabilidade(habilidade);
-        res.status(201);
-        res.send("Created");
+        res.status(201).json({
+            status: req.body.status,
+            message: 'habilidade inserido com sucesso'
+        });
 
     }
 
@@ -33,8 +35,10 @@ class HabilidadeController {
 
         let habilidade = new Habilidade(req.params.id, req.body.nome, req.body.descricao);
         await HabilidadeBO.alterarHabilidade(habilidade);
-        res.status(200);
-        res.send("Updated");
+        res.status(200).json({
+            status: req.body.status,
+            message: 'habilidade atualizada com sucesso'
+        });
 
     }
 
@@ -45,8 +49,11 @@ class HabilidadeController {
             habilidade.id = req.params.id;
             habilidade = await HabilidadeBO.obterHabilidade(habilidade);
             HabilidadeBO.excluirHabilidade(habilidade);
-            res.status(200);
-            res.send("Updated");
+            res.status(200).json({
+                status: req.body.status,
+                message: 'habilidade removida com sucesso'
+            });
+    
         }
 
     }
