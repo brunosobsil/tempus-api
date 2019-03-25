@@ -18,8 +18,8 @@ class HabilidadeBO {
         dao.alterarHabilidade(habilidade);
     }
 
-    excluirHabilidade(habilidade) {
-        dao.excluirHabilidade(habilidade);
+    async excluirHabilidade(habilidade) {
+        await dao.excluirHabilidade(habilidade);
     }
 }
 

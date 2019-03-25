@@ -47,11 +47,10 @@ class HabilidadeController {
         if (req.params.id) {
             let habilidade = new Habilidade();
             habilidade.id = req.params.id;
-            habilidade = await HabilidadeBO.obterHabilidade(habilidade);
-            HabilidadeBO.excluirHabilidade(habilidade);
+            await HabilidadeBO.excluirHabilidade(habilidade);
             res.status(200).json({
                 status: req.body.status,
-                message: 'habilidade removida com sucesso'
+                message: 'Habilidade excluida com sucesso.'
             });
     
         }
