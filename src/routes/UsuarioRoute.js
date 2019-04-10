@@ -6,4 +6,5 @@ module.exports = function (app) {
     app.get('/usuario/:id', controller.obterUsuario);
     app.post('/usuario', controller.incluirUsuario);
     app.put('/usuario/:id', controller.alterarUsuario);
+    app.put('/usuario/:id/status', controller.alterarStatusUsuario);
 }

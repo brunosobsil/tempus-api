@@ -26,7 +26,7 @@ class HabilidadeController {
         await HabilidadeBO.incluirHabilidade(habilidade);
         res.status(201).json({
             status: req.body.status,
-            message: 'habilidade inserido com sucesso'
+            message: 'habilidade inserida com sucesso'
         });
 
     }
@@ -50,7 +50,7 @@ class HabilidadeController {
             await HabilidadeBO.excluirHabilidade(habilidade);
             res.status(200).json({
                 status: req.body.status,
-                message: 'Habilidade excluida com sucesso.'
+                message: 'habilidade excluida com sucesso.'
             });
     
         }
