@@ -23,6 +23,7 @@ class Usuario extends PessoaFisica {
     set id(id) {
         this._id = id;
     }
+
 }
 
 module.exports = Usuario;

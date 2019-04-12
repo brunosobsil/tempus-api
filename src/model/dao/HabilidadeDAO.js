@@ -2,10 +2,6 @@ const { Habilidade } = require('../orm/models');
 
 class HabilidadeDAO {
 
-    constructor() {
-        Habilidade.sync();
-    }
-
     async obterHabilidade(habilidade) {
         const hability = await Habilidade.findById(habilidade.id);
         return hability;
@@ -24,24 +20,22 @@ class HabilidadeDAO {
     }
 
     async alterarHabilidade(habilidade) {
-        await Habilidade.update(
-            {
-                nome: habilidade.nome,
-                descricao: habilidade.descricao
-            },
-            {
-                where: { id: habilidade.id }
-            });
+        await Habilidade.update({
+            nome: habilidade.nome,
+            descricao: habilidade.descricao
+        },
+        {
+            where: { id: habilidade.id }
+        });
     }
 
     async excluirHabilidade(habilidade) {
         
         await Habilidade.destroy({
-            where: {
-               id: habilidade.id
-            }
-         });
+            where: { id: habilidade.id }
+        });
     }
+
 }
 
 module.exports = new HabilidadeDAO();
