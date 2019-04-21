@@ -30,7 +30,6 @@ class HabilidadeDAO {
     }
 
     async excluirHabilidade(habilidade) {
-        
         await Habilidade.destroy({
             where: { id: habilidade.id }
         });

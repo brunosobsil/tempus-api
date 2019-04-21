@@ -21,6 +21,7 @@ class AgendamentoBO {
     excluirAgendamento(agendamento){
         dao.excluirAgendamento(agendamento);
     }
+
 }
 
 module.exports = new AgendamentoBO();
