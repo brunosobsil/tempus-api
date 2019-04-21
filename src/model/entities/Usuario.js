@@ -23,6 +23,14 @@ class Usuario extends PessoaFisica {
         this._id = id;
     }
 
+    get coordenador() {
+        return this._coordenador;
+    }
+
+    set coordenador(coordenador) {
+        this._coordenador = coordenador;
+    }
+
 }
 
 module.exports = Usuario;

@@ -6,8 +6,8 @@ class Atendimento {
         this._id = id;
         this._assunto = assunto;
         this._descricao = descricao;
-        this._data_sugerida = data_sugerida;
-        this._data_exclucao = data_exclucao;
+        this._dataSugerida = dataSugerida;
+        this._dataExclusao = dataExclusao;
     }
 
     get id() {
@@ -34,20 +34,20 @@ class Atendimento {
         this._descricao = descricao;
     }
 
-    get data_sugerida() {
-        return this._data_sugerida;
+    get dataSugerida() {
+        return this._dataSugerida;
     }
 
-    set data_sugerida(data_sugerida) {
-        this._data_sugerida = data_sugerida;
+    set dataSugerida(dataSugerida) {
+        this._dataSugerida = dataSugerida;
     }
 
-    get data_exclusao() {
-        return this._data_exclusao;
+    get dataExclusao() {
+        return this._dataExclusao;
     }
 
-    set data_exclusao(data_exclusao) {
-        this._data_exclusao = data_exclusao;
+    set dataExclusao(dataExclusao) {
+        this._dataExclusao = dataExclusao;
     }
 }
 
