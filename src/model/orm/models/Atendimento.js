@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Atendimento.associate = models => {
-        Atendimento.belongsTo(models.Projeto)
+        Atendimento.hasOne(models.Projeto)
     }
 
     Atendimento.associate = models => {

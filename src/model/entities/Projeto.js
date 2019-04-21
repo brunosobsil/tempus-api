@@ -1,8 +1,10 @@
 class Projeto {
-    constructor(id, nome, descricao) {
+    constructor(id, nome, descricaoAtividades, horasEstimadas, horasRealizadas) {
         this._id = id;
         this._nome = nome;
-        this._descricao = descricao;
+        this._descricaoAtividades = descricaoAtividades;
+        this._horasEstimadas = horasEstimadas;
+        this._horasRealizadas = horasRealizadas;
     }
 
     get id() {
@@ -21,12 +23,28 @@ class Projeto {
         this._nome = nome;
     }
 
-    get descricao() {
-        return this._descricao;
+    get descricaoAtividades() {
+        return this._descricao_Atividades;
     }
 
-    set descricao(descricao) {
-        this._descricao = descricao;
+    set descricaoAtividades(descricaoAtividades) {
+        this._descricaoAtividades = descricaoAtividades;
+    }
+
+    get horasEstimadas() {
+        return this.horasEstimadas;
+    }
+
+    set horasEstimadas(horasEstimadas) {
+        this._horasEstimadas = horasEstimadas;
+    }
+
+    get horasRealizadas() {
+        return this.horasRealizadas;
+    }
+
+    set horasRealizadas(horasRealizadas) {
+        this._horasRealizadas = horasRealizadas;
     }
 }
 

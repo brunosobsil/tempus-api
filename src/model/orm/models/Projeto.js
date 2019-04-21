@@ -5,5 +5,9 @@ module.exports = (sequelize, DataTypes) => {
         horas_estimadas: DataTypes.FLOAT
     });
 
+    Projeto.associate = models => {
+        Projeto.belongsTo(models.Atendimento)
+    }
+
     return Projeto;
 }
