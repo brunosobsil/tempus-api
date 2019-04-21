@@ -1,9 +1,7 @@
-class Atendimento {
+class Agendamento {
 
-    constructor(id, assunto, descricao, dataSugerida, dataExclusao) {
+    constructor(id,  dataSugerida, dataExclusao) {
         this._id = id;
-        this._assunto = assunto;
-        this._descricao = descricao;
         this._dataSugerida = dataSugerida;
         this._dataExclusao = dataExclusao;
     }
@@ -14,22 +12,6 @@ class Atendimento {
 
     set id(id) {
         this._id = id;
-    }
-
-    get assunto() {
-        return this._assunto;
-    }
-
-    set assunto(assunto) {
-        this._assunto = assunto;
-    }
-
-    get descricao() {
-        return this._descricao;
-    }
-
-    set descricao(descricao) {
-        this._descricao = descricao;
     }
 
     get dataSugerida() {
@@ -49,4 +31,4 @@ class Atendimento {
     }
 }
 
-module.exports = Atendimento;
+module.exports = Agendamento;

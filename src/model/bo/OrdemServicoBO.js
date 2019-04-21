@@ -1,4 +1,4 @@
-const dao = require('../dao/OrderServicoDAO');
+const dao = require('../dao/OrdemServicoDAO');
 
 class OrdemServicoBO {
 
