@@ -7,5 +7,5 @@ module.exports = function (app) {
     app.delete('/os/:id', controller.excluirOS);
     app.post('/os', controller.incluirOS);
     app.put('/os/:id', controller.alterarOS);
-    app.put('/projeto/:id/cancelar', controller.cancelarOS);
+    app.put('/os/:id/cancelar', controller.cancelarOS);
 }
