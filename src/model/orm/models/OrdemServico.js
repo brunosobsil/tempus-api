@@ -9,5 +9,9 @@ module.exports = (sequelize, DataTypes) => {
         data_exclusao: DataTypes.DATE
     });
 
+    OrdemServico.associate = models => {
+        OrdemServico.belongsTo(models.Agendamento)
+    }
+    
     return OrdemServico;
 }

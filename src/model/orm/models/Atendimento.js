@@ -8,5 +8,21 @@ module.exports = (sequelize, DataTypes) => {
         data_exclusao: DataTypes.DATE
     });
 
+    Atendimento.associate = models => {
+        Atendimento.belongsTo(models.Projeto)
+    }
+
+    Atendimento.associate = models => {
+        Atendimento.belongsTo(models.Usuario)
+    }
+
+    Atendimento.associate = models => {
+        Atendimento.hasOne(models.Habilidade)
+    }
+
+    Atendimento.associate = models => {
+        Atendimento.hasMany(models.Agendamento)
+    }
+
     return Atendimento;
 }

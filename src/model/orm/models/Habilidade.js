@@ -6,7 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Habilidade.associate = models => {
-        Habilidade.belongsToMany(models.Analista, {through: models.AnalistaHabilidade, foreignKey: 'id_habilidade'})
+        Habilidade.belongsToMany(models.Usuario, {through: models.UsuarioHabilidade, foreignKey: 'id_habilidade'})
+    }
+
+    Habilidade.associate = models => {
+        Habilidade.belongsTo(models.Atendimento)
     }
 
     return Habilidade;
