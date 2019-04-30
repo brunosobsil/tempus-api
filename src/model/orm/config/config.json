@@ -1,7 +1,7 @@
 {
   "desenv": {
-    "username": "postgres",
-    "password": null,
+    "username": "leno",
+    "password": "123456",
     "database": "tempus",
     "host": "localhost",
     "dialect": "postgres",
