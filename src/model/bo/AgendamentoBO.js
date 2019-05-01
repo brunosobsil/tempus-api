@@ -9,9 +9,9 @@ class AgendamentoBO {
     obterAgendamentos(){
         return dao.obterAgendamentos();
     }
-    
+
     incluirAgendamento(agendamento){
-        dao.incluirAgendamento(agendamento);
+        return dao.incluirAgendamento(agendamento);
     }
 
     alterarAgendamento(agendamento){

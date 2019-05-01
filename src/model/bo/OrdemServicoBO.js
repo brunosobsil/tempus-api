@@ -11,7 +11,7 @@ class OrdemServicoBO {
     }
 
     incluirOrdemServico(OrdemServico) {
-        dao.incluirOrdemServico(OrdemServico);
+        return dao.incluirOrdemServico(OrdemServico);
     }
 
     alterarOrdemServico(OrdemServico){

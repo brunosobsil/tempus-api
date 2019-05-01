@@ -11,7 +11,7 @@ class ProjetoBO {
     }
 
     incluirProjeto(projeto) {
-        dao.incluirProjeto(projeto);
+        return dao.incluirProjeto(projeto);
     }
 
     alterarProjeto(projeto){

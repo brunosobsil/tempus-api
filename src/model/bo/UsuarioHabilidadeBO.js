@@ -7,7 +7,7 @@ class UsuarioHabilidadeBO {
     }
 
     incluirUsuarioHabilidade(usuarioHabilidade){
-        dao.incluirUsuarioHabilidade(usuarioHabilidade);
+        return dao.incluirUsuarioHabilidade(usuarioHabilidade);
     }
 
     alterarUsuarioHabilidade(usuarioHabilidade){
@@ -17,7 +17,6 @@ class UsuarioHabilidadeBO {
     excluirUsuarioHabilidade(usuarioHabilidade){
         dao.excluirUsuarioHabilidade(usuarioHabilidade);
     }
-
 }
 
 module.exports = new UsuarioHabilidadeBO();

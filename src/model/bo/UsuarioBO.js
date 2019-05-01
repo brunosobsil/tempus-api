@@ -9,7 +9,7 @@ class UsuarioBO {
     obterUsuarios(){
         return dao.obterUsuarios();
     }
-    
+
     incluirUsuario(usuario){
         return dao.incluirUsuario(usuario);
     }
