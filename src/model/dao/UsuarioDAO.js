@@ -13,7 +13,6 @@ class UsuarioDAO {
     }
 
     async incluirUsuario(usuario) {
-        
         let newUser = await Usuario.create({
               nome: usuario.nome,
               endereco: usuario.endereco,
@@ -24,7 +23,6 @@ class UsuarioDAO {
         });
 
         return newUser.id;
-
     }
 
     async alterarUsuario(usuario) {

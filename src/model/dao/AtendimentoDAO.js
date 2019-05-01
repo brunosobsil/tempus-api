@@ -1,6 +1,7 @@
 const { Atendimento } = require('../orm/models');
 
 class AtendimentoDAO {
+
     async obterAtendimento(atendimento) {
         const atend = await Atendimento.findById(atendimento.id);
         return atend;
@@ -12,10 +13,12 @@ class AtendimentoDAO {
     }
 
     async incluirAtendimento(atendimento) {
-        await Atendimento.create({
+        let newAtendimento = await Atendimento.create({
             nome: atendimento.nome,
             descricao: atendimento.descricao
         });
+
+        return newAtendimento.id;
     }
 
     async alterarAtendimento(atendimento) {
@@ -29,14 +32,14 @@ class AtendimentoDAO {
             });
     }
 
-    async excluirAtendimento(atendimento) {
-        
+    async excluirAtendimento(atendimento) {   
         await Atendimento.destroy({
             where: {
                id: atendimento.id
             }
-         });
+        });
     }
+
 }
 
 module.exports = new AtendimentoDAO();
