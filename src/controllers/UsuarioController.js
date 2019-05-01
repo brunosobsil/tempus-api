@@ -23,10 +23,11 @@ class UsuarioController {
     async incluirUsuario(req, res) {
 
         let usuario = new Usuario(req.body.nome, req.body.endereco, req.body.email, req.body.status, req.body.cpf, req.body.perfil);
-        await UsuarioBO.incluirUsuario(usuario);
+        let id = await UsuarioBO.incluirUsuario(usuario);
         res.status(201).json({
             status: req.body.status,
-            message: 'usuario inserido com sucesso'
+            message: 'usuario inserido com sucesso',
+            id: id
         });
 
     }

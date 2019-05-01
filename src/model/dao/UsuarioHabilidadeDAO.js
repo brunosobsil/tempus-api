@@ -11,11 +11,14 @@ class UsuarioHabilidadeDAO {
     }
 
     async incluirUsuarioHabilidade(usuarioHabilidade){
-        await UsuarioHabilidade.create({
+
+        let habUsu = await UsuarioHabilidade.create({
             nivel: usuarioHabilidade.nivel,
             id_usuario: usuarioHabilidade.usuario.id,
             id_habilidade: usuarioHabilidade.habilidade.id
         });
+
+        return habUsu;
     }
 
     async alterarUsuarioHabilidade(usuarioHabilidade) {

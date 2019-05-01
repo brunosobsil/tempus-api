@@ -44,6 +44,31 @@ class UsuarioHabilidadeController {
 
     }
 
+    async incluirUsuarioHabilidades(req, res) {
+
+        let usuario = new Usuario();
+        usuario.id = req.params.id_usuario;
+        usuario = await UsuarioBO.obterUsuario(usuario);
+
+        let habilidades = req.body.habilidades;
+        for(let i = 0; i < habilidades.lenght; i++){
+
+            let habilidade = new Habilidade();
+            habilidade.id = habilidades[i].id_habilidade;
+            habilidade = await HabilidadeBO.obterHabilidade(habilidade);
+
+            let usuHabilidade = new UsuarioHabilidade(habilidades[i].nivel, usuario, habilidade);
+            await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
+
+        }
+        
+        res.status(201).json({
+            status: req.body.status,
+            message: 'associacao entre usuario e habilidades realizada com sucesso'
+        });
+
+    }
+
     async excluirUsuarioHabilidade(req, res) {
 
         // Obter usuario por ID

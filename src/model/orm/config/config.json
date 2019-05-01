@@ -1,10 +1,11 @@
 {
   "desenv": {
     "username": "postgres",
-    "password": null,
+    "password": "123456",
     "database": "tempus",
     "host": "localhost",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging": false
   }
 }

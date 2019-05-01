@@ -11,7 +11,7 @@ class UsuarioBO {
     }
     
     incluirUsuario(usuario){
-        dao.incluirUsuario(usuario);
+        return dao.incluirUsuario(usuario);
     }
 
     alterarUsuario(usuario){

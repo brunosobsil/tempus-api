@@ -13,10 +13,12 @@ class HabilidadeDAO {
     }
 
     async incluirHabilidade(habilidade) {
-        await Habilidade.create({
+        let newSkill = await Habilidade.create({
             nome: habilidade.nome,
             descricao: habilidade.descricao
         });
+
+        return newSkill.id;
     }
 
     async alterarHabilidade(habilidade) {
