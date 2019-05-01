@@ -35,11 +35,14 @@ class UsuarioHabilidadeController {
         habilidade.id = req.body.id_habilidade;
         habilidade = await HabilidadeBO.obterHabilidade(habilidade);
 
+        // Define  Usuario habilidade
         let usuHabilidade = new UsuarioHabilidade(req.body.nivel, usuario, habilidade);
-        await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
+        let id = await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
+        
         res.status(201).json({
             status: req.body.status,
-            message: 'associacao entre usuario e habilidade realizada com sucesso'
+            message: 'associacao entre usuario e habilidade realizada com sucesso',
+            id: id
         });
 
     }

@@ -24,6 +24,7 @@ class UsuarioController {
 
         let usuario = new Usuario(req.body.nome, req.body.endereco, req.body.email, req.body.status, req.body.cpf, req.body.perfil);
         let id = await UsuarioBO.incluirUsuario(usuario);
+        
         res.status(201).json({
             status: req.body.status,
             message: 'usuario inserido com sucesso',

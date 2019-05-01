@@ -23,10 +23,12 @@ class AtendimentoController {
     async incluirAtendimento(req, res) {
 
         let atendimento = new Atendimento(null, req.body.nome, req.body.descricao);
-        await AtendimentoBO.incluirAtendimento(atendimento);
+        let id = await AtendimentoBO.incluirAtendimento(atendimento);
+
         res.status(201).json({
             status: req.body.status,
-            message: 'atendimento inserido com sucesso'
+            message: 'atendimento inserido com sucesso',
+            id: id
         });
 
     }
@@ -35,6 +37,7 @@ class AtendimentoController {
 
         let atendimento = new Atendimento(req.params.id, req.body.nome, req.body.descricao);
         await AtendimentoBO.alterarAtendimento(atendimento);
+
         res.status(200).json({
             status: req.body.status,
             message: 'atendimento atualizado com sucesso'
@@ -52,7 +55,6 @@ class AtendimentoController {
                 status: req.body.status,
                 message: 'atendimento excluido com sucesso.'
             });
-    
         }
 
     }

@@ -23,10 +23,12 @@ class ProjetoController {
     async incluirProjeto(req, res) {
 
         let projeto = new Projeto(req.body.nome, req.body.descricao_atividades, req.body.horas_estimadas, req.body.horas_realizadas);
-        await ProjetoBO.incluirProjeto(projeto);
+        let id = await ProjetoBO.incluirProjeto(projeto);
+        
         res.status(201).json({
             status: req.body.status,
-            message: 'projeto inserido com sucesso'
+            message: 'projeto inserido com sucesso',
+            id: id
         });
 
     }
@@ -57,6 +59,7 @@ class ProjetoController {
         }
 
     }
+
 }
 
 module.exports = ProjetoController;

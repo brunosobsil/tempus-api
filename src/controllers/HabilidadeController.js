@@ -23,10 +23,12 @@ class HabilidadeController {
     async incluirHabilidade(req, res) {
 
         let habilidade = new Habilidade(null, req.body.nome, req.body.descricao);
-        await HabilidadeBO.incluirHabilidade(habilidade);
+        let id = await HabilidadeBO.incluirHabilidade(habilidade);
+        
         res.status(201).json({
             status: req.body.status,
-            message: 'habilidade inserida com sucesso'
+            message: 'habilidade inserida com sucesso',
+            id: id
         });
 
     }
@@ -35,6 +37,7 @@ class HabilidadeController {
 
         let habilidade = new Habilidade(req.params.id, req.body.nome, req.body.descricao);
         await HabilidadeBO.alterarHabilidade(habilidade);
+        
         res.status(200).json({
             status: req.body.status,
             message: 'habilidade atualizada com sucesso'
@@ -52,7 +55,6 @@ class HabilidadeController {
                 status: req.body.status,
                 message: 'habilidade excluida com sucesso.'
             });
-    
         }
 
     }

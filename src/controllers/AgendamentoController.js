@@ -23,10 +23,12 @@ class AgendamentoController {
     async incluirAgendamento(req, res) {
 
         let agendamento = new Agendamento(null, req.body.nome, req.body.descricao);
-        await AgendamentoBO.incluirAgendamento(agendamento);
+        let id = await AgendamentoBO.incluirAgendamento(agendamento);
+
         res.status(201).json({
             status: req.body.status,
-            message: 'agendamento inserido com sucesso'
+            message: 'agendamento inserido com sucesso',
+            id: id
         });
 
     }
@@ -35,6 +37,7 @@ class AgendamentoController {
 
         let agendamento = new Agendamento(req.params.id, req.body.nome, req.body.descricao);
         await AgendamentoBO.alterarAgendamento(agendamento);
+
         res.status(200).json({
             status: req.body.status,
             message: 'agendamento atualizado com sucesso'
@@ -48,11 +51,11 @@ class AgendamentoController {
             let agendamento = new Agendamento();
             agendamento.id = req.params.id;
             await AgendamentoBO.excluirAgendamento(agendamento);
+
             res.status(200).json({
                 status: req.body.status,
                 message: 'agendamento excluido com sucesso.'
             });
-    
         }
 
     }
