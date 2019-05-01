@@ -9,9 +9,5 @@ module.exports = (sequelize, DataTypes) => {
         Habilidade.belongsToMany(models.Usuario, {through: models.UsuarioHabilidade, foreignKey: 'id_habilidade'})
     }
 
-    Habilidade.associate = models => {
-        Habilidade.belongsTo(models.Atendimento)
-    }
-
     return Habilidade;
 }
