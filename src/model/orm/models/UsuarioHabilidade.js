@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
         UsuarioHabilidade.belongsTo(models.Habilidade, {
             as: 'habilidade',
-            foreignKey : 'id_habilidade',            
+            foreignKey : 'id_habilidade',
             sourceKey: 'id'
         })
     };
