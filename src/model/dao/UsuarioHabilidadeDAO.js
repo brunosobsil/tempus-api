@@ -1,9 +1,10 @@
-const { UsuarioHabilidade } = require('../orm/models');
+const { UsuarioHabilidade, Usuario, Habilidade } = require('../orm/models');
 
 class UsuarioHabilidadeDAO {
 
     async obterUsuarioHabilidade(usuarioHabilidade) {
-        const usuHabilidade = await UsuarioHabilidade.find({
+        const usuHabilidade = await UsuarioHabilidade.findAll({
+            include: [{model: Habilidade, as: 'habilidade'},{model: Usuario, as: 'usuario'}],
             where: { id_usuario: usuarioHabilidade.usuario.id }
         });
 
@@ -38,6 +39,14 @@ class UsuarioHabilidadeDAO {
             where: {
                 id_usuario: usuarioHabilidade.usuario.id,
                 id_habilidade: usuarioHabilidade.habilidade.id
+            }
+        });
+    }
+
+    async excluirUsuarioHabilidades(usuarioHabilidade){
+        await UsuarioHabilidade.destroy({
+            where: {
+                id_usuario: usuarioHabilidade.usuario.id
             }
         });
     }

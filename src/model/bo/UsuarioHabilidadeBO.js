@@ -18,6 +18,10 @@ class UsuarioHabilidadeBO {
         dao.excluirUsuarioHabilidade(usuarioHabilidade);
     }
 
+    excluirUsuarioHabilidades(usuarioHabilidade){
+        dao.excluirUsuarioHabilidades(usuarioHabilidade);
+    }
+
 }
 
 module.exports = new UsuarioHabilidadeBO();

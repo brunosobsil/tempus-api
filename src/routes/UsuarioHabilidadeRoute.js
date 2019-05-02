@@ -7,4 +7,5 @@ module.exports = function (app) {
     app.put('/usuario/:id_usuario/habilidade/:id_habilidade', controller.alterarUsuarioHabilidade);
     app.delete('/usuario/:id_usuario/habilidade/:id_habilidade', controller.excluirUsuarioHabilidade);    
     app.post('/usuario/:id_usuario/habilidades', controller.incluirUsuarioHabilidades);
+    app.delete('/usuario/:id_usuario/habilidades', controller.excluirUsuarioHabilidades);    
 }
