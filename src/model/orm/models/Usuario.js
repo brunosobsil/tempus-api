@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         Usuario.hasMany(models.Atendimento, {as: 'id_solicitante'})
         Usuario.hasMany(models.Agendamento, {as: 'id_executante'})
         Usuario.hasMany(models.UsuarioHabilidade, {foreignKey: 'id_usuario'});
+        Usuario.belongsTo(models.Cliente)
     }
 
     return Usuario;
