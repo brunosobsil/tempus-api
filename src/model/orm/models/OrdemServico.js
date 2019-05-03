@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
 
     const OrdemServico = sequelize.define('OrdemServico',{
-        status: DataTypes.ENUM('Aberta', 'Em execução', 'Em aprovação', 'Aprovada', 'Rejeitada'),
+        status: DataTypes.ENUM('Aberta', 'Em execução', 'Em aprovação', 'Aprovada', 'Rejeitada', 'Concluída', 'Cancelada'),
         descricao: DataTypes.STRING,
         data_hora_inicio: DataTypes.DATE,
         data_hora_final: DataTypes.DATE,
