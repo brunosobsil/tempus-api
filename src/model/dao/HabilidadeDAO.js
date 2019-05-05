@@ -3,7 +3,7 @@ const { Habilidade } = require('../orm/models');
 class HabilidadeDAO {
 
     async obterHabilidade(habilidade) {
-        const hability = await Habilidade.findById(habilidade.id);
+        const hability = await Habilidade.findByPk(habilidade.id);
         return hability;
     }
 

@@ -3,7 +3,7 @@ const { Projeto } = require('../orm/models');
 class ProjetoDAO {
 
     async obterProjeto(projeto) {
-        const proj = await Projeto.findById(projeto.id);
+        const proj = await Projeto.findByPk(projeto.id);
         return proj;
     }
 

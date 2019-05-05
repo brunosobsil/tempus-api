@@ -3,7 +3,7 @@ const { Agendamento } = require('../orm/models');
 class AgendamentoDAO {
 
     async obterAgendamento(agendamento) {
-        const agend = await Agendamento.findById(agendamento.id);
+        const agend = await Agendamento.findByPk(agendamento.id);
         return agend;
     }
 

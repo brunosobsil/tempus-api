@@ -3,7 +3,7 @@ const { Cliente } = require('../orm/models');
 class ClienteDAO {
 
     async obterCliente(cliente) {
-        const cli = await Cliente.findById(cliente.id);
+        const cli = await Cliente.findByPk(cliente.id);
         return cli;
     }
 

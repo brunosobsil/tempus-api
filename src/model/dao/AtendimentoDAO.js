@@ -3,7 +3,7 @@ const { Atendimento } = require('../orm/models');
 class AtendimentoDAO {
 
     async obterAtendimento(atendimento) {
-        const atend = await Atendimento.findById(atendimento.id);
+        const atend = await Atendimento.findByPk(atendimento.id);
         return atend;
     }
 
