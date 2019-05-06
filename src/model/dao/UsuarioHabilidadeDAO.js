@@ -18,7 +18,7 @@ class UsuarioHabilidadeDAO {
             id_habilidade: usuarioHabilidade.habilidade.id
         });
 
-        return habUsu.id;
+        return habUsu;
     }
 
     async alterarUsuarioHabilidade(usuarioHabilidade) {
