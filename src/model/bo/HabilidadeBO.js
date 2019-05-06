@@ -11,7 +11,7 @@ class HabilidadeBO {
     }
 
     incluirHabilidade(habilidade) {
-        dao.incluirHabilidade(habilidade);
+        return dao.incluirHabilidade(habilidade);
     }
 
     alterarHabilidade(habilidade) {

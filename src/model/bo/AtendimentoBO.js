@@ -1,6 +1,7 @@
 const dao = require('../dao/AtendimentoDAO');
 
 class AtendimentoBO {
+
     obterAtendimento(atendimento){
         return dao.obterAtendimento(atendimento);
     }
@@ -10,7 +11,7 @@ class AtendimentoBO {
     }
     
     incluirAtendimento(atendimento){
-        dao.incluirAtendimento(atendimento);
+        return dao.incluirAtendimento(atendimento);
     }
 
     alterarAtendimento(atendimento){

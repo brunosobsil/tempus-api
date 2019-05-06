@@ -32,14 +32,43 @@ class UsuarioHabilidadeController {
 
         // Obter habilidade por ID
         let habilidade = new Habilidade();
-        habilidade.id = req.body.id_habilidade;
+        habilidade.id = req.body.habilidade.id;
         habilidade = await HabilidadeBO.obterHabilidade(habilidade);
 
+        // Define  Usuario habilidade
         let usuHabilidade = new UsuarioHabilidade(req.body.nivel, usuario, habilidade);
-        await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
+        let id = await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
+        
         res.status(201).json({
             status: req.body.status,
-            message: 'associacao entre usuario e habilidade realizada com sucesso'
+            message: 'associacao entre usuario e habilidade realizada com sucesso',
+            id: id
+        });
+
+    }
+
+    async incluirUsuarioHabilidades(req, res) {
+        
+        let usuario = new Usuario();
+        usuario.id = req.params.id_usuario;
+        usuario = await UsuarioBO.obterUsuario(usuario);
+
+        let habilidades = req.body.habilidades;
+
+        for(let i = 0; i < habilidades.length; i++){
+
+            let habilidade = new Habilidade();
+            habilidade.id = habilidades[i].id;
+            habilidade = await HabilidadeBO.obterHabilidade(habilidade);
+
+            let usuHabilidade = new UsuarioHabilidade(habilidades[i].nivel, usuario, habilidade);
+            await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
+
+        }
+        
+        res.status(201).json({
+            status: req.body.status,
+            message: 'associacao entre usuario e habilidades realizada com sucesso'
         });
 
     }
@@ -59,6 +88,24 @@ class UsuarioHabilidadeController {
         let usuHabilidade = new UsuarioHabilidade(null, usuario, habilidade);
 
         await UsuarioHabilidadeBO.excluirUsuarioHabilidade(usuHabilidade);
+
+        res.status(201).json({
+            status: req.body.status,
+            message: 'associacao entre usuario e habilidade excluida com sucesso'
+        });
+
+    }
+
+    async excluirUsuarioHabilidades(req, res) {
+
+        // Obter usuario por ID
+        let usuario = new Usuario();
+        usuario.id = req.params.id_usuario;
+        usuario = await UsuarioBO.obterUsuario(usuario);
+
+        let usuHabilidade = new UsuarioHabilidade(null, usuario, null);
+
+        await UsuarioHabilidadeBO.excluirUsuarioHabilidades(usuHabilidade);
 
         res.status(201).json({
             status: req.body.status,

@@ -13,12 +13,14 @@ class ProjetoDAO {
     }
 
     async incluirProjeto(projeto) {
-        await Projeto.create({
+        let newProjeto = await Projeto.create({
             nome: projeto.nome,
             descricao_Atividades: projeto.descricao_atividades,
             horas_estimadas: projeto.horas_estimadas,
             horas_realizadas: projeto.horas_realizadas
         });
+
+        return newProjeto.id;
     }
 
     async alterarProjeto(projeto) {

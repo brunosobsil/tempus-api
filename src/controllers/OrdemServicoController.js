@@ -23,10 +23,12 @@ class OrdemServicoController {
     async incluirOrdemServico(req, res) {
 
         let ordemServico = new OrdemServico(null, req.body.nome, req.body.descricao);
-        await OrdemServicoBO.incluirOrdemServico(ordemServico);
+        let id = await OrdemServicoBO.incluirOrdemServico(ordemServico);
+
         res.status(201).json({
             status: req.body.status,
-            message: 'ordem de servico inserida com sucesso'
+            message: 'ordem de servico inserida com sucesso',
+            id: id
         });
 
     }
@@ -52,7 +54,6 @@ class OrdemServicoController {
                 status: req.body.status,
                 message: 'ordem de servico excluida com sucesso.'
             });
-    
         }
 
     }

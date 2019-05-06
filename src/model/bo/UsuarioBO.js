@@ -9,9 +9,9 @@ class UsuarioBO {
     obterUsuarios(){
         return dao.obterUsuarios();
     }
-    
+
     incluirUsuario(usuario){
-        dao.incluirUsuario(usuario);
+        return dao.incluirUsuario(usuario);
     }
 
     alterarUsuario(usuario){

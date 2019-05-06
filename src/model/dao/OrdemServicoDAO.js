@@ -13,10 +13,12 @@ class OrdemServicoDAO {
     }
 
     async incluirOrdemServico(ordemServico) {
-        await OrdemServico.create({
+        let newOS = await OrdemServico.create({
             nome: ordemServico.nome,
             descricao: ordemServico.descricao
         });
+
+        return newOS.id;
     }
 
     async alterarOrdemServico(ordemServico) {

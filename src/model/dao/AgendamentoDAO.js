@@ -13,10 +13,12 @@ class AgendamentoDAO {
     }
 
     async incluirAgendamento(agendamento) {
-        await Agendamento.create({
+        let newAgendamento = await Agendamento.create({
             nome: agendamento.nome,
             descricao: agendamento.descricao
         });
+
+        return newAgendamento.id;
     }
 
     async alterarAgendamento(agendamento) {
