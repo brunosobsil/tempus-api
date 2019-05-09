@@ -24,7 +24,7 @@ class Projeto {
     }
 
     get descricaoAtividades() {
-        return this._descricao_Atividades;
+        return this._descricaoAtividades;
     }
 
     set descricaoAtividades(descricaoAtividades) {

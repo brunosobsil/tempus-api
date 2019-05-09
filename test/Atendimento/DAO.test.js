@@ -1,6 +1,9 @@
 const AtendimentoDAO = require("../../src/model/dao/AtendimentoDAO");
 const Atendimento = require("../../src/model/entities/Atendimento");
 
+const UsuarioDAO = require("../../src/model/dao/UsuarioDAO");
+const Usuario = require("../../src/model/entities/Usuario");
+
 index();
 
 async function index(){
@@ -13,17 +16,22 @@ async function index(){
 
 async function incluir(){
 
+    let u = new Usuario();
+    u.id = 1;
+    let usu = await UsuarioDAO.obterUsuario(u);
+
     let t = new Atendimento();
     t.assunto = "Implantação Cocacola";
     t.descricao = "Executar a implantação na cocacola";
-    t.data_sugerida = '31/12/2020';
-
+    t.data_sugerida = "2020-01-01 00:00:00";
+    t.usuario = usu;
+    
     let id = await AtendimentoDAO.incluirAtendimento(t);
 
     if(id > 0)
         console.log('Atendimento incluido com sucesso. ID: ' + id);
     else
-        console.error('Erro ao incluir data_sugerida');
+        console.error('Erro ao incluir atendimento');
 
 }
 
@@ -54,11 +62,16 @@ async function obterTodos(){
 
 async function alterar(){
 
+    let u = new Usuario();
+    u.id = 1;
+    let usu = await UsuarioDAO.obterUsuario(u);
+    
     let t = new Atendimento();
     t.id = 1;
     t.assunto = "Implantação Pepsi";
     t.descricao = "Executar a implantação na Pepsi";
-    t.data_sugerida = '31/12/2019';
+    t.data_sugerida = "2025-01-01 00:00:00";
+    t.usuario = usu;
 
     await AtendimentoDAO.alterarAtendimento(t);
     let t2 = await AtendimentoDAO.obterAtendimento(t);
@@ -67,7 +80,6 @@ async function alterar(){
         console.log('Atendimento alterado com sucesso: ' + JSON.stringify(t2));
     else
         console.error('Erro ao alterar atendimento');
-
 }
 
 async function excluir(){

@@ -22,7 +22,7 @@ class OrdemServicoController {
 
     async incluirOrdemServico(req, res) {
 
-        let ordemServico = new OrdemServico(null, req.body.nome, req.body.descricao);
+        let ordemServico = new OrdemServico(null, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, req.body.status);
         let id = await OrdemServicoBO.incluirOrdemServico(ordemServico);
 
         res.status(201).json({
@@ -35,7 +35,7 @@ class OrdemServicoController {
 
     async alterarOrdemServico(req, res) {
 
-        let ordemServico = new OrdemServico(req.params.id, req.body.nome, req.body.descricao);
+        let ordemServico = new OrdemServico(req.params.id, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, req.body.status);
         await OrdemServicoBO.alterarOrdemServico(ordemServico);
         res.status(200).json({
             status: req.body.status,

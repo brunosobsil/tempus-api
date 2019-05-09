@@ -1,5 +1,5 @@
-const HabilidadeDAO = require("../../src/model/dao/HabilidadeDAO");
-const Habilidade = require("../../src/model/entities/Habilidade");
+const OrdemServicoDAO = require("../../src/model/dao/OrdemServicoDAO");
+const OrdemServico = require("../../src/model/entities/OrdemServico");
 
 index();
 
@@ -13,40 +13,42 @@ async function index(){
 
 async function incluir(){
 
-    let t = new Habilidade();
-    t.nome = "Linguagem Javascript";
+    let t = new OrdemServico();
     t.descricao = "Desenvolvimento na linguagem javascript";
+    t.dataHoraInicio = "2019-12-31 23:30:59";
+    t.dataHoraFinal = "2019-12-31 23:59:58";
+    t.status = "Aberta";
 
-    let id = await HabilidadeDAO.incluirHabilidade(t);
+    let id = await OrdemServicoDAO.incluirOrdemServico(t);
 
     if(id > 0)
-        console.log('Habilidade incluida com sucesso. ID: ' + id);
+        console.log('Ordem de servico incluida com sucesso. ID: ' + id);
     else
-        console.log('Erro ao incluir habilidade');
+        console.log('Erro ao incluir ordem de servico');
 
 }
 
 async function obter(){
 
-    let t = new Habilidade();
+    let t = new OrdemServico();
     t.id = 1;
-    let t2 = await HabilidadeDAO.obterHabilidade(t);
+    let t2 = await OrdemServicoDAO.obterOrdemServico(t);
 
     if(t2 != null)
-        console.log('Habilidade recuperada: ' + JSON.stringify(t2));
+        console.log('Ordem de servico recuperada: ' + JSON.stringify(t2));
     else
-        console.error('Nenhuma habilidade recuperada');
+        console.error('Nenhuma ordem de servico recuperada');
 
 }
 
 async function obterTodos(){
 
-    let t = await HabilidadeDAO.obterHabilidades();
+    let t = await OrdemServicoDAO.obterOrdensServico();
 
     if(t != null)
-        console.log('Habilidades recuperadas: ' + JSON.stringify(t));
+        console.log('Ordens de servico recuperadas: ' + JSON.stringify(t));
     else
-        console.error('Nenhuma habilidade recuperada');
+        console.error('Nenhuma ordem de servico recuperada');
 
 }
 
