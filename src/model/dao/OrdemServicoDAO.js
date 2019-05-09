@@ -2,7 +2,7 @@ const { OrdemServico } = require('../orm/models');
 
 class OrdemServicoDAO {
 
-    async obterHabilidade(ordemServico) {
+    async obterOrdemServico(ordemServico) {
         const agend = await OrdemServico.findByPk(ordemServico.id);
         return agend;
     }
@@ -15,7 +15,10 @@ class OrdemServicoDAO {
     async incluirOrdemServico(ordemServico) {
         let newOS = await OrdemServico.create({
             nome: ordemServico.nome,
-            descricao: ordemServico.descricao
+            descricao: ordemServico.descricao,
+            data_hora_inicio: ordemServico.data_hora_inicio,
+            data_hora_final: ordemServico.data_hora_final,
+            status: ordemServico.status
         });
 
         return newOS.id;
@@ -24,7 +27,10 @@ class OrdemServicoDAO {
     async alterarOrdemServico(ordemServico) {
         await OrdemServico.update({
             nome: ordemServico.nome,
-            descricao: ordemServico.descricao
+            descricao: ordemServico.descricao,
+            data_hora_inicio: ordemServico.data_hora_inicio,
+            data_hora_final: ordemServico.data_hora_final,
+            status: ordemServico.status
         },
         {
             where: { id: ordemServico.id }

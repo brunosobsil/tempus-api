@@ -11,7 +11,6 @@ async function index(){
     await incluir();
     await obter();
     await alterar();
-    await obterTodos();
     //await excluir();
     //await excluirTodos();
 }
