@@ -17,7 +17,7 @@ class AtendimentoDAO {
             assunto: atendimento.assunto,
             descricao: atendimento.descricao,
             data_sugerida: atendimento.data_sugerida,
-            usuario: atendimento.usuario
+            id_usuario: atendimento.usuario.id
         });
 
         return newAtendimento.id;
@@ -28,7 +28,7 @@ class AtendimentoDAO {
             assunto: atendimento.assunto,
             descricao: atendimento.descricao,
             data_sugerida: atendimento.data_sugerida,
-            usuario: atendimento.usuario
+            id_usuario: atendimento.usuario.id
         },
         {
             where: { id: atendimento.id }

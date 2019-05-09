@@ -7,7 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Projeto.associate = models => {
-        Projeto.belongsTo(models.Atendimento)
+        Projeto.belongsTo(models.Atendimento,  {
+            as: 'atendimento',
+            foreignKey : 'id_atendimento',
+            sourceKey: 'id'
+        })
     }
 
     return Projeto;

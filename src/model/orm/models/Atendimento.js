@@ -3,26 +3,18 @@ module.exports = (sequelize, DataTypes) => {
     const Atendimento = sequelize.define('Atendimento',{
         assunto: DataTypes.STRING,
         descricao: DataTypes.STRING,
-        data_sugerida: DataTypes.DATE,
-        //data_inclusao: DataTypes.DATE,
-        data_exclusao: DataTypes.DATE
+        data_sugerida: DataTypes.DATE
     });
 
     Atendimento.associate = models => {
-        Atendimento.hasOne(models.Projeto)
+        Atendimento.hasOne(models.Projeto, {foreignKey: 'id_atendimento'})
+        Atendimento.belongsTo(models.Usuario, {
+            as: 'usuario',
+            foreignKey : 'id_usuario',
+            sourceKey: 'id'
+        });
+        Atendimento.belongsTo(models.Habilidade, {foreignKey: 'id_habilidade'})
+        Atendimento.hasMany(models.Agendamento, {foreignKey: 'id_atendimento'})
     }
-
-    Atendimento.associate = models => {
-        Atendimento.belongsTo(models.Usuario)
-    }
-
-    Atendimento.associate = models => {
-        Atendimento.hasOne(models.Habilidade)
-    }
-
-    Atendimento.associate = models => {
-        Atendimento.hasMany(models.Agendamento)
-    }
-
     return Atendimento;
 }

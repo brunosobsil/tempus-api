@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
 
     Usuario.associate = models => {
         Usuario.belongsToMany(models.Habilidade, {through: models.UsuarioHabilidade, foreignKey: 'id_usuario'})
-        Usuario.hasMany(models.Atendimento, {as: 'id_solicitante'})
-        Usuario.hasMany(models.Agendamento, {as: 'id_executante'})
+        Usuario.hasMany(models.Atendimento, {foreignKey: 'id_usuario'})
+        Usuario.hasMany(models.Agendamento, {foreignKey: 'id_usuario'})
         Usuario.hasMany(models.UsuarioHabilidade, {foreignKey: 'id_usuario'});
-        Usuario.belongsTo(models.Cliente)
+        Usuario.belongsTo(models.Cliente, { foreignKey: 'id_cliente'});
     }
 
     return Usuario;

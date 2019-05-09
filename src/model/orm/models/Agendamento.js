@@ -7,15 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Agendamento.associate = models => {
-        Agendamento.belongsTo(models.Atendimento)
-    }
-
-    Agendamento.associate = models => {
-        Agendamento.belongsTo(models.Usuario)
-    }
-
-    Agendamento.associate = models => {
-        Agendamento.hasMany(models.OrdemServico)
+        Agendamento.belongsTo(models.Atendimento, {
+            as: 'atendimento',
+            foreignKey : 'id_atendimento',
+            sourceKey: 'id'
+        })
+        Agendamento.hasMany(models.OrdemServico, {foreignKey: 'id_agendamento'})
     }
 
     return Agendamento;
