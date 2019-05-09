@@ -13,7 +13,7 @@ class AtendimentoDAO {
 
     async incluirAtendimento(atendimento) {
         await Atendimento.create({
-            nome: atendimento.nome,
+            assunto: atendimento.assunto,
             descricao: atendimento.descricao
         });
     }
@@ -21,7 +21,7 @@ class AtendimentoDAO {
     async alterarAtendimento(atendimento) {
         await Atendimento.update(
             {
-                nome: atendimento.nome,
+                assunto: atendimento.assunto,
                 descricao: atendimento.descricao
             },
             {
