@@ -66,7 +66,7 @@ async function alterar(){
     let t2 = await UsuarioHabilidadeDAO.obterUsuarioHabilidade(t);
 
     if(t2 != null)
-        console.log('UsuarioHabilidade alterado com sucesso: ' + JSON.stringify(t2));
+        console.log('UsuarioHabilidade alterada com sucesso: ' + JSON.stringify(t2));
     else
         console.error('Erro ao alterar usuarioHabilidade');
 
@@ -82,7 +82,7 @@ async function excluir(){
     let t2 = await UsuarioHabilidadeDAO.obterUsuarioHabilidade(t);
     
     if(t2 != null)
-        console.log('UsuarioHabilidade excluido com sucesso. ID: ' + JSON.stringify(t2));
+        console.log('UsuarioHabilidade excluida com sucesso. ' + JSON.stringify(t2));
     else
         console.error('Erro ao excluir usuarioHabilidade');
 
@@ -97,7 +97,7 @@ async function excluirTodos(){
     let t2 = await UsuarioHabilidadeDAO.obterUsuarioHabilidade(t);
     
     if(t2 == null)
-        console.log('UsuarioHabilidade excluido com sucesso. ID: ' + JSON.stringify(t2));
+        console.log('UsuarioHabilidade excluido com sucesso. ' + JSON.stringify(t2));
     else
         console.error('Erro ao excluir usuarioHabilidade');
 

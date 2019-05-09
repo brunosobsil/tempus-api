@@ -22,7 +22,7 @@ class AgendamentoController {
 
     async incluirAgendamento(req, res) {
 
-        let agendamento = new Agendamento(null, req.body.nome, req.body.descricao);
+        let agendamento = new Agendamento(null, req.body.data_sugerida);
         let id = await AgendamentoBO.incluirAgendamento(agendamento);
 
         res.status(201).json({
@@ -35,7 +35,7 @@ class AgendamentoController {
 
     async alterarAgendamento(req, res) {
 
-        let agendamento = new Agendamento(req.params.id, req.body.nome, req.body.descricao);
+        let agendamento = new Agendamento(req.params.id, req.body.data_sugerida);
         await AgendamentoBO.alterarAgendamento(agendamento);
 
         res.status(200).json({

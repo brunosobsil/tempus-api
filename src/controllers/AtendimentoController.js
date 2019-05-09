@@ -22,7 +22,7 @@ class AtendimentoController {
 
     async incluirAtendimento(req, res) {
 
-        let atendimento = new Atendimento(null, req.body.nome, req.body.descricao);
+        let atendimento = new Atendimento(null, req.body.assunto, req.body.descricao, req.body.dataSugerida);
         let id = await AtendimentoBO.incluirAtendimento(atendimento);
 
         res.status(201).json({
@@ -35,7 +35,7 @@ class AtendimentoController {
 
     async alterarAtendimento(req, res) {
 
-        let atendimento = new Atendimento(req.params.id, req.body.nome, req.body.descricao);
+        let atendimento = new Atendimento(req.params.id, req.body.assunto, req.body.descricao, req.body.dataSugerida);
         await AtendimentoBO.alterarAtendimento(atendimento);
 
         res.status(200).json({
