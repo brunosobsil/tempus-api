@@ -1,6 +1,9 @@
 const AtendimentoDAO = require("../../src/model/dao/AtendimentoDAO");
 const Atendimento = require("../../src/model/entities/Atendimento");
 
+const HabilidadeDAO = require("../../src/model/dao/HabilidadeDAO");
+const Habilidade = require("../../src/model/entities/Habilidade");
+
 const UsuarioDAO = require("../../src/model/dao/UsuarioDAO");
 const Usuario = require("../../src/model/entities/Usuario");
 
@@ -18,14 +21,18 @@ async function incluir(){
 
     let u = new Usuario();
     u.id = 1;
-    let usu = await UsuarioDAO.obterUsuario(u);
+    u = await UsuarioDAO.obterUsuario(u);
 
-    let t = new Atendimento();
-    t.assunto = "Implantação Cocacola";
-    t.descricao = "Executar a implantação na cocacola";
-    t.data_sugerida = "2020-01-01 00:00:00";
-    t.usuario = usu;
-    
+    let h = new Habilidade();
+    h.id = 1;
+    h = await HabilidadeDAO.obterHabilidade(h);
+
+    let assunto = "Implantação Cocacola";
+    let descricao = "Executar a implantação na cocacola";
+    let data_sugerida = "2019-05-11 19:39:10.255-03";
+
+    let t = new Atendimento(null, assunto, descricao, data_sugerida, null, h, u);
+
     let id = await AtendimentoDAO.incluirAtendimento(t);
 
     if(id > 0)
@@ -64,14 +71,17 @@ async function alterar(){
 
     let u = new Usuario();
     u.id = 1;
-    let usu = await UsuarioDAO.obterUsuario(u);
+    u = await UsuarioDAO.obterUsuario(u);
+
+    let h = new Habilidade();
+    h.id = 1;
+    h = await HabilidadeDAO.obterHabilidade(h);
+
+    let assunto = "Implantação Pepsi";
+    let descricao = "Executar a implantação na Pepsi";
+    let data_sugerida = "2019-05-12 01:36:55";
     
-    let t = new Atendimento();
-    t.id = 1;
-    t.assunto = "Implantação Pepsi";
-    t.descricao = "Executar a implantação na Pepsi";
-    t.data_sugerida = "2025-01-01 00:00:00";
-    t.usuario = usu;
+    let t = new Atendimento(1, assunto, descricao, data_sugerida, null, h, u);
 
     await AtendimentoDAO.alterarAtendimento(t);
     let t2 = await AtendimentoDAO.obterAtendimento(t);
