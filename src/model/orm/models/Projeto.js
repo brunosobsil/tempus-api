@@ -2,6 +2,7 @@ module.exports = (sequelize, DataTypes) => {
 
     const Projeto = sequelize.define('Projeto',{
         nome: DataTypes.STRING,
+        descricao_atividades: DataTypes.STRING,
         horas_estimadas: DataTypes.FLOAT,
         horas_realizadas: DataTypes.FLOAT
     });
