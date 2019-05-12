@@ -15,9 +15,10 @@ class ProjetoDAO {
     async incluirProjeto(projeto) {
         let newProjeto = await Projeto.create({
             nome: projeto.nome,
-            descricao_atividades: projeto.descricao_atividades,
-            horas_estimadas: projeto.horas_estimadas,
-            horas_realizadas: projeto.horas_realizadas
+            descricao_atividades: projeto.descricaoAtividades,
+            horas_estimadas: projeto.horasEstimadas,
+            horas_realizadas: projeto.horasRealizadas,
+            id_atendimento: projeto.atendimento.id
         });
 
         return newProjeto.id;
@@ -26,9 +27,10 @@ class ProjetoDAO {
     async alterarProjeto(projeto) {
         await Projeto.update({
             nome: projeto.nome,
-            descricao_atividades: projeto.descricao_atividades,
-            horas_estimadas: projeto.horas_estimadas,
-            horas_realizadas: projeto.horas_realizadas
+            descricao_atividades: projeto.descricaoAtividades,
+            horas_estimadas: projeto.horasEstimadas,
+            horas_realizadas: projeto.horasRealizadas,
+            id_atendimento: projeto.atendimento.id
         }, {
             where: { id: projeto.id }
         });

@@ -18,9 +18,9 @@ class ClienteDAO {
               endereco: cliente.endereco,
               email: cliente.email,
               status: cliente.status,
-              razaoSocial: cliente.razaoSocial,
+              razao_social: cliente.razaoSocial,
               cnpj: cliente.cnpj,
-              nomeResponsavel: cliente.nomeResponsavel
+              nome_responsavel: cliente.nomeResponsavel
         });
 
         return newCli.id;
@@ -32,9 +32,9 @@ class ClienteDAO {
             endereco: cliente.endereco,
             email: cliente.email,
             status: cliente.status,
-            razaoSocial: cliente.razaoSocial,
+            razao_social: cliente.razaoSocial,
             cnpj: cliente.cnpj,
-            nomeResponsavel: cliente.nomeResponsavel
+            nome_responsavel: cliente.nomeResponsavel
         }, {
             where: { id: cliente.id }
         });

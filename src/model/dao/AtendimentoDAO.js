@@ -16,7 +16,8 @@ class AtendimentoDAO {
         let newAtendimento = await Atendimento.create({
             assunto: atendimento.assunto,
             descricao: atendimento.descricao,
-            data_sugerida: atendimento.data_sugerida,
+            data_sugerida: atendimento.dataSugerida,
+            id_habilidade: atendimento.habilidade.id,
             id_usuario: atendimento.usuario.id
         });
 
@@ -27,7 +28,8 @@ class AtendimentoDAO {
         await Atendimento.update({
             assunto: atendimento.assunto,
             descricao: atendimento.descricao,
-            data_sugerida: atendimento.data_sugerida,
+            data_sugerida: atendimento.dataSugerida,
+            id_habilidade: atendimento.habilidade.id,
             id_usuario: atendimento.usuario.id
         },
         {
