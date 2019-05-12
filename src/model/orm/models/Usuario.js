@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         nome: DataTypes.STRING,
         endereco: DataTypes.STRING,
         email: {type: DataTypes.STRING, unique: true},
+        senha: DataTypes.STRING,
         status: DataTypes.BOOLEAN,
         cpf: {type: DataTypes.STRING, unique: true},
         perfil: DataTypes.INTEGER

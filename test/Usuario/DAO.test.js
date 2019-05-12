@@ -1,6 +1,9 @@
 const UsuarioDAO = require("../../src/model/dao/UsuarioDAO");
 const Usuario = require("../../src/model/entities/Usuario");
 
+const ClienteDAO = require("../../src/model/dao/ClienteDAO");
+const Cliente = require("../../src/model/entities/Cliente");
+
 index();
 
 async function index(){
@@ -12,14 +15,19 @@ async function index(){
 }
 
 async function incluir(){
+    let c = new Cliente();
+    c.id = 1;
+    c = await ClienteDAO.obterCliente(c);
 
     let t = new Usuario();
     t.nome = "Maria Fernanda";
     t.endereco = "Av. das Americas 10005";
     t.email = "maria@eu.com";
+    t.senha = "123456";
     t.status = true;
     t.cpf = "500.926.021-26";
     t.perfil = 1;
+    t.cliente = c;
 
     let id = await UsuarioDAO.incluirUsuario(t);
     if(id > 0)
@@ -55,14 +63,20 @@ async function obterTodos(){
 
 async function alterar(){
 
+    let c = new Cliente();
+    c.id = 1;
+    c = await ClienteDAO.obterCliente(c);
+
     let t = new Usuario();
     t.id = 1;
     t.nome = "Maria Fernanda Alt";
     t.endereco = "Av. das Americas  Alt 10005";
     t.email = "maria-alt@eu.com";
+    t.senha = "123456";
     t.status = false;
     t.cpf = "500.926.021-29";
     t.perfil = 2;
+    t.cliente = c;
 
     await UsuarioDAO.alterarUsuario(t);
     let t2 = await UsuarioDAO.obterUsuario(t);

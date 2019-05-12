@@ -62,7 +62,7 @@ class ProjetoController {
     async excluirProjeto(req, res) {
 
         if (req.params.id) {
-            let projeto = new Habilidade();
+            let projeto = new Projeto();
             projeto.id = req.params.id;
             await ProjetoBO.excluirProjeto(projeto);
             res.status(200).json({

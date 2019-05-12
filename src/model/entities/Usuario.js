@@ -2,10 +2,11 @@ const PessoaFisica = require('./PessoaFisica');
 
 class Usuario extends PessoaFisica {
 
-    constructor(id, nome, endereco, email, status, cpf, perfil, cliente) {
+    constructor(id, nome, endereco, email, senha, status, cpf, perfil, cliente) {
         super(nome, endereco, email, status, cpf);
         this._cliente = cliente;
         this._perfil = perfil;
+        this._senha = senha;
         this._id = id;
     }
 
@@ -15,6 +16,14 @@ class Usuario extends PessoaFisica {
 
     set perfil(perfil) {
         this._perfil = perfil;
+    }
+
+    get senha() {
+        return this._senha;
+    }
+
+    set senha(senha) {
+        this._senha = senha;
     }
 
     get id() {
