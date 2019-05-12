@@ -14,8 +14,9 @@ class AgendamentoDAO {
 
     async incluirAgendamento(agendamento) {
         let newAgendamento = await Agendamento.create({
-            nome: agendamento.nome,
-            descricao: agendamento.descricao
+            data_hora_agendamento: agendamento.dataHoraAgendamento,
+            id_atendimento: agendamento.atendimento.id,
+            id_usuario: agendamento.usuario.id
         });
 
         return newAgendamento.id;
@@ -23,8 +24,9 @@ class AgendamentoDAO {
 
     async alterarAgendamento(agendamento) {
         await Agendamento.update({
-            nome: agendamento.nome,
-            descricao: agendamento.descricao
+            data_hora_agendamento: agendamento.dataHoraAgendamento,
+            id_atendimento: agendamento.atendimento.id,
+            id_usuario: agendamento.usuario.id
         },
         {
             where: { id: agendamento.id }
@@ -32,9 +34,11 @@ class AgendamentoDAO {
     }
 
     async excluirAgendamento(agendamento) {
-        let agend = await this.obterAgendamento(agendamento);
-        agend.status = agendamento.status;
-        await agend.save();
+        await Agendamento.destroy({
+            where: {
+               id: agendamento.id
+            }
+        });
     }
 
 }

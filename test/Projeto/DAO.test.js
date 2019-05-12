@@ -1,6 +1,9 @@
 const ProjetoDAO = require("../../src/model/dao/ProjetoDAO");
 const Projeto = require("../../src/model/entities/Projeto");
 
+const AtendimentoDAO = require("../../src/model/dao/AtendimentoDAO");
+const Atendimento = require("../../src/model/entities/Atendimento");
+
 index();
 
 async function index(){
@@ -13,11 +16,16 @@ async function index(){
 
 async function incluir(){
 
-    let t = new Projeto();
-    t.nome = "Projeto final da faculdade";
-    t.descricao = "O melhor projeto do seculo";
-    t.horas_estimadas = 80.95;
-    t.horas_realizadas = 12;
+    let a = new Atendimento();
+    a.id = 1;
+    a = await AtendimentoDAO.obterAtendimento(a);
+
+    let nome = "Projeto final da faculdade 2019";
+    let descricao_atividades = "O melhor projeto do seculo 21";
+    let horas_estimadas = 80.95;
+    let horas_realizadas = 12;
+
+    let t = new Projeto(null, nome, descricao_atividades, horas_estimadas, horas_realizadas, a);
 
     let id = await ProjetoDAO.incluirProjeto(t);
 
@@ -54,12 +62,16 @@ async function obterTodos(){
 
 async function alterar(){
 
-    let t = new Projeto();
-    t.id = 1;
-    t.nome = "Projeto final da faculdade alterada";
-    t.descricao = "O melhor projeto do seculo alterada";
-    t.horas_estimadas = 180.11;
-    t.horas_realizadas = 120.55;
+    let a = new Atendimento();
+    a.id = 1;
+    a = await AtendimentoDAO.obterAtendimento(a);
+    
+    let nome = "Projeto final da faculdade 2199";
+    let descricao_atividades = "O melhor projeto do seculo 22";
+    let horas_estimadas = 2000.95;
+    let horas_realizadas = 120.12;
+
+    let t = new Projeto(1, nome, descricao_atividades, horas_estimadas, horas_realizadas, a);
 
     await ProjetoDAO.alterarProjeto(t);
     let t2 = await ProjetoDAO.obterProjeto(t);

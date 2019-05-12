@@ -1,11 +1,13 @@
 class Atendimento {
 
-    constructor(id, assunto, descricao, dataSugerida, dataExclusao) {
+    constructor(id, assunto, descricao, dataSugerida, dataExclusao, habilidade, usuario) {
         this._id = id;
         this._assunto = assunto;
         this._descricao = descricao;
         this._dataSugerida = dataSugerida;
         this._dataExclusao = dataExclusao;
+        this._habilidade = habilidade;
+        this._usuario = usuario;
     }
 
     get id() {
@@ -46,6 +48,22 @@ class Atendimento {
 
     set dataExclusao(dataExclusao) {
         this._dataExclusao = dataExclusao;
+    }
+
+    get usuario() {
+        return this._usuario;
+    }
+
+    set usuario(usuario) {
+        this._usuario = usuario;
+    }
+
+    get habilidade() {
+        return this._habilidade;
+    }
+
+    set habilidade(habilidade) {
+        this._habilidade = habilidade;
     }
 }
 

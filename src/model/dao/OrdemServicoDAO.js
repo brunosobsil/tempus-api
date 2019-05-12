@@ -14,11 +14,11 @@ class OrdemServicoDAO {
 
     async incluirOrdemServico(ordemServico) {
         let newOS = await OrdemServico.create({
-            nome: ordemServico.nome,
             descricao: ordemServico.descricao,
-            data_hora_inicio: ordemServico.data_hora_inicio,
-            data_hora_final: ordemServico.data_hora_final,
-            status: ordemServico.status
+            data_hora_inicio: ordemServico.dataHoraInicio,
+            data_hora_final: ordemServico.dataHoraFinal,
+            status: ordemServico.status,
+            id_agendamento: ordemServico.agendamento.id
         });
 
         return newOS.id;
@@ -26,11 +26,11 @@ class OrdemServicoDAO {
 
     async alterarOrdemServico(ordemServico) {
         await OrdemServico.update({
-            nome: ordemServico.nome,
             descricao: ordemServico.descricao,
-            data_hora_inicio: ordemServico.data_hora_inicio,
-            data_hora_final: ordemServico.data_hora_final,
-            status: ordemServico.status
+            data_hora_inicio: ordemServico.dataHoraInicio,
+            data_hora_final: ordemServico.dataHoraFinal,
+            status: ordemServico.status,
+            id_agendamento: ordemServico.agendamento.id
         },
         {
             where: { id: ordemServico.id }

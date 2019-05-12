@@ -1,12 +1,15 @@
 const OrdemServico = require('../model/entities/OrdemServico');
 const OrdemServicoBO = require('../model/bo/OrdemServicoBO');
 
+const Agendamento = require('../model/entities/Agendamento');
+const AgendamentoBO = require('../model/bo/AgendamentoBO');
+
 class OrdemServicoController {
 
     async obterOrdemServico(req, res) {
 
         if (req.params.id) {
-            // Obter ordem de servico por ID 
+            // Obter ordem de servico por ID
             let ordemServico = new OrdemServico();
             ordemServico.id = req.params.id;
             ordemServico = await OrdemServicoBO.obterOrdemServico(ordemServico);
@@ -22,7 +25,12 @@ class OrdemServicoController {
 
     async incluirOrdemServico(req, res) {
 
-        let ordemServico = new OrdemServico(null, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, req.body.status);
+        // Obter agendamento por ID
+        let agendamento = new Agendamento();
+        agendamento.id = req.body.id_agendamento;
+        agendamento = await AgendamentoBO.obterAgendamento(agendamento);
+
+        let ordemServico = new OrdemServico(null, req.body.status, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, agendamento);
         let id = await OrdemServicoBO.incluirOrdemServico(ordemServico);
 
         res.status(201).json({
@@ -35,8 +43,14 @@ class OrdemServicoController {
 
     async alterarOrdemServico(req, res) {
 
-        let ordemServico = new OrdemServico(req.params.id, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, req.body.status);
+        // Obter agendamento por ID
+        let agendamento = new Agendamento();
+        agendamento.id = req.body.id_agendamento;
+        agendamento = await AgendamentoBO.obterAgendamento(agendamento);
+
+        let ordemServico = new OrdemServico(req.params.id, req.body.status, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, agendamento);
         await OrdemServicoBO.alterarOrdemServico(ordemServico);
+
         res.status(200).json({
             status: req.body.status,
             message: 'ordem de servico atualizada com sucesso'
@@ -50,6 +64,7 @@ class OrdemServicoController {
             let ordemServico = new OrdemServico();
             ordemServico.id = req.params.id;
             await OrdemServicoBO.excluirOrdemServico(ordemServico);
+
             res.status(200).json({
                 status: req.body.status,
                 message: 'ordem de servico excluida com sucesso.'

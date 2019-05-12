@@ -1,10 +1,11 @@
 class OrdemServico {
-    constructor(id, status, descricao, dataHoraInicio, dataHoraFinal) {
+    constructor(id, status, descricao, dataHoraInicio, dataHoraFinal, agendamento) {
         this._id = id;
         this._status = status;
         this._descricao = descricao;
         this._dataHoraInicio = dataHoraInicio;
         this._dataHoraFinal = dataHoraFinal;
+        this._agendamento = agendamento;
     }
 
     get id() {
@@ -45,6 +46,14 @@ class OrdemServico {
 
     set descricao(descricao) {
         this._descricao = descricao;
+    }
+
+    get agendamento() {
+        return this._agendamento;
+    }
+
+    set agendamento(agendamento) {
+        this._agendamento = agendamento;
     }
 }
 

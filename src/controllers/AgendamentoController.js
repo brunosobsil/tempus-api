@@ -1,6 +1,12 @@
 const Agendamento = require('../model/entities/Agendamento');
 const AgendamentoBO = require('../model/bo/AgendamentoBO');
 
+const Atendimento = require('../model/entities/Atendimento');
+const AtendimentoBO = require('../model/bo/AtendimentoBO');
+
+const Usuario = require('../model/entities/Usuario');
+const UsuarioBO = require('../model/bo/UsuarioBO');
+
 class AgendamentoController {
 
     async obterAgendamento(req, res) {
@@ -22,7 +28,17 @@ class AgendamentoController {
 
     async incluirAgendamento(req, res) {
 
-        let agendamento = new Agendamento(null, req.body.data_sugerida);
+        // Obter usuario por ID
+        let usuario = new Usuario();
+        usuario.id = req.body.id_usuario;
+        usuario = await UsuarioBO.obterUsuario(usuario);
+
+        // Obter atendimento por ID
+        let atendimento = new Atendimento();
+        atendimento.id = req.body.id_atendimento;
+        atendimento = await AtendimentoBO.obterAtendimento(atendimento);
+
+        let agendamento = new Agendamento(null, req.body.data_hora_agendamento, atendimento, usuario);
         let id = await AgendamentoBO.incluirAgendamento(agendamento);
 
         res.status(201).json({
@@ -35,7 +51,17 @@ class AgendamentoController {
 
     async alterarAgendamento(req, res) {
 
-        let agendamento = new Agendamento(req.params.id, req.body.data_sugerida);
+        // Obter usuario por ID
+        let usuario = new Usuario();
+        usuario.id = req.body.id_usuario;
+        usuario = await UsuarioBO.obterUsuario(usuario);
+
+        // Obter atendimento por ID
+        let atendimento = new Atendimento();
+        atendimento.id = req.body.id_atendimento;
+        atendimento = await AtendimentoBO.obterAtendimento(atendimento);
+
+        let agendamento = new Agendamento(req.params.id, req.body.data_hora_agendamento, atendimento, usuario);
         await AgendamentoBO.alterarAgendamento(agendamento);
 
         res.status(200).json({

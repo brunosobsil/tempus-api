@@ -19,7 +19,8 @@ class UsuarioDAO {
               email: usuario.email,
               status: usuario.status,
               cpf: usuario.cpf,
-              perfil: usuario.perfil
+              perfil: usuario.perfil,
+              id_cliente: usuario.cliente.id
         });
 
         return newUser.id;
@@ -32,7 +33,8 @@ class UsuarioDAO {
             email: usuario.email,
             status: usuario.status,
             cpf: usuario.cpf,
-            perfil: usuario.perfil
+            perfil: usuario.perfil,
+            id_cliente: usuario.cliente.id
         }, {
             where: { id: usuario.id }
         });

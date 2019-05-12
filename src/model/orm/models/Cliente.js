@@ -5,9 +5,9 @@ module.exports = (sequelize, DataTypes) => {
         endereco: DataTypes.STRING,
         email: {type: DataTypes.STRING, unique: true},
         status: DataTypes.BOOLEAN,
-        razaoSocial: {type: DataTypes.STRING, unique: true},
+        razao_social: {type: DataTypes.STRING, unique: true},
         cnpj: {type: DataTypes.STRING, unique: true},
-        nomeResponsavel: DataTypes.STRING,
+        nome_responsavel: DataTypes.STRING,
     });
 
     Cliente.associate = models => {

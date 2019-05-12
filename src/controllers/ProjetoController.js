@@ -1,6 +1,9 @@
 const Projeto = require('../model/entities/Projeto');
 const ProjetoBO = require('../model/bo/ProjetoBO');
 
+const Atendimento = require('../model/entities/Atendimento');
+const AtendimentoBO = require('../model/bo/AtendimentoBO');
+
 class ProjetoController {
 
     async obterProjeto(req, res) {
@@ -21,9 +24,15 @@ class ProjetoController {
     }
 
     async incluirProjeto(req, res) {
+        // Obter atendimento por ID
+        let atendimento = new Atendimento();
+        atendimento.id = req.body.id_atendimento;
+        atendimento = await AtendimentoBO.obterAtendimento(atendimento);
 
-        let projeto = new Projeto(req.body.nome, req.body.descricao_atividades, req.body.horas_estimadas, req.body.horas_realizadas);
+        let projeto = new Projeto(null, req.body.nome, req.body.descricao_atividades, req.body.horas_estimadas, req.body.horas_realizadas, atendimento);
         let id = await ProjetoBO.incluirProjeto(projeto);
+
+        console.log(JSON.stringify(projeto));
         
         res.status(201).json({
             status: req.body.status,
@@ -35,7 +44,12 @@ class ProjetoController {
 
     async alterarProjeto(req, res) {
 
-        let projeto = new Projeto(req.body.nome, req.body.descricao_atividades, req.body.horas_estimadas, req.body.horas_realizadas);
+        // Obter atendimento por ID
+        let atendimento = new Atendimento();
+        atendimento.id = req.body.id_atendimento;
+        atendimento = await AtendimentoBO.obterAtendimento(atendimento);
+
+        let projeto = new Projeto(req.params.id, req.body.nome, req.body.descricao_atividades, req.body.horas_estimadas, req.body.horas_realizadas, atendimento);
         await ProjetoBO.alterarProjeto(projeto);
 
         res.status(200).json({
@@ -55,7 +69,7 @@ class ProjetoController {
                 status: req.body.status,
                 message: 'projeto excluido com sucesso.'
             });
-    
+
         }
 
     }
