@@ -32,10 +32,10 @@ class UsuarioHabilidadeController {
 
         // Obter habilidade por ID
         let habilidade = new Habilidade();
-        habilidade.id = req.body.habilidade.id;
+        habilidade.id = req.body.id_habilidade;
         habilidade = await HabilidadeBO.obterHabilidade(habilidade);
 
-        // Define  Usuario habilidade
+        // Define Usuario habilidade
         let usuHabilidade = new UsuarioHabilidade(req.body.nivel, usuario, habilidade);
         let id = await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
         
