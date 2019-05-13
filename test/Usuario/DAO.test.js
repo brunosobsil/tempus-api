@@ -28,8 +28,10 @@ async function incluir(){
     t.cpf = "500.926.021-26";
     t.perfil = 1;
     t.cliente = c;
+    t.coordenador = new Usuario();
 
     let id = await UsuarioDAO.incluirUsuario(t);
+
     if(id > 0)
         console.log('Usuario incluido com sucesso. ID: ' + id);
     else
@@ -77,6 +79,7 @@ async function alterar(){
     t.cpf = "500.926.021-29";
     t.perfil = 2;
     t.cliente = c;
+    t.coordenador = new Usuario();
 
     await UsuarioDAO.alterarUsuario(t);
     let t2 = await UsuarioDAO.obterUsuario(t);

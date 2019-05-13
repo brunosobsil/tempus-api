@@ -21,7 +21,8 @@ class UsuarioDAO {
               status: usuario.status,
               cpf: usuario.cpf,
               perfil: usuario.perfil,
-              id_cliente: usuario.cliente.id
+              id_cliente: usuario.cliente.id,
+              id_coordenador: usuario.coordenador.id
         });
 
         return newUser.id;
@@ -36,7 +37,8 @@ class UsuarioDAO {
             status: usuario.status,
             cpf: usuario.cpf,
             perfil: usuario.perfil,
-            id_cliente: usuario.cliente.id
+            id_cliente: usuario.cliente.id,
+            id_coordenador: usuario.coordenador.id
         }, {
             where: { id: usuario.id }
         });

@@ -27,12 +27,22 @@ class UsuarioController {
 
         // Obter cliente por ID
         let cliente = new Cliente();
-        cliente.id = req.body.id_cliente;
-        cliente = await ClienteBO.obterCliente(cliente);
 
-        let usuario = new Usuario(null, req.body.nome, req.body.endereco, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, cliente);
+        if(req.body.id_cliente){
+            cliente.id = req.body.id_cliente;
+            cliente = await ClienteBO.obterCliente(cliente);
+        }
+
+        // Obter coordenador por ID
+        let coordenador = new Usuario();
+
+        if(req.body.id_coordenador){
+            coordenador.id = req.body.id_coordenador;
+            coordenador = await UsuarioBO.obterUsuario(coordenador);
+        }
+
+        let usuario = new Usuario(null, req.body.nome, req.body.endereco, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
         let id = await UsuarioBO.incluirUsuario(usuario);
-        console.log('Entre: '  + JSON.stringify(usuario));
 
         res.status(201).json({
             status: req.body.status,
@@ -46,10 +56,21 @@ class UsuarioController {
 
         // Obter cliente por ID
         let cliente = new Cliente();
-        cliente.id = req.body.id_cliente;
-        cliente = await ClienteBO.obterCliente(cliente);
 
-        let usuario = new Usuario(req.params.id, req.body.nome, req.body.endereco, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, cliente);
+        if(req.body.id_cliente){
+            cliente.id = req.body.id_cliente;
+            cliente = await ClienteBO.obterCliente(cliente);
+        }
+
+        // Obter coordenador por ID
+        let coordenador = new Usuario();
+
+        if(req.body.id_coordenador){
+            coordenador.id = req.body.id_coordenador;
+            coordenador = await UsuarioBO.obterUsuario(coordenador);
+        }
+
+        let usuario = new Usuario(req.params.id, req.body.nome, req.body.endereco, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
         await UsuarioBO.alterarUsuario(usuario);
 
         res.status(200).json({

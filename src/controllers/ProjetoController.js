@@ -31,8 +31,6 @@ class ProjetoController {
 
         let projeto = new Projeto(null, req.body.nome, req.body.descricao_atividades, req.body.horas_estimadas, req.body.horas_realizadas, atendimento);
         let id = await ProjetoBO.incluirProjeto(projeto);
-
-        console.log(JSON.stringify(projeto));
         
         res.status(201).json({
             status: req.body.status,
