@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     const Atendimento = sequelize.define('Atendimento',{
         assunto: DataTypes.STRING,
         descricao: DataTypes.STRING,
-        data_sugerida: DataTypes.DATE
+        data_sugerida: DataTypes.DATEONLY
     });
 
     Atendimento.associate = models => {
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey : 'id_usuario',
             sourceKey: 'id'
         });
-        Atendimento.belongsTo(models.Habilidade, {foreignKey: 'id_habilidade'})
+        Atendimento.belongsTo(models.Habilidade, {foreignKey: 'id_habilidade', as: 'habilidade'})
         Atendimento.hasMany(models.Agendamento, {foreignKey: 'id_atendimento'})
     }
     return Atendimento;

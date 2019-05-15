@@ -30,12 +30,12 @@ class AtendimentoController {
 
         // Obter usuario por ID
         let usuario = new Usuario();
-        usuario.id = req.body.id_usuario;
+        usuario.id = req.body.usuario.id
         usuario = await UsuarioBO.obterUsuario(usuario);
 
         // Obter habilidade por ID
         let habilidade = new Habilidade();
-        habilidade.id = req.body.id_habilidade;
+        habilidade.id = req.body.habilidade.id;
         habilidade = await HabilidadeBO.obterHabilidade(habilidade);
 
         // Define Atendimento
@@ -54,12 +54,12 @@ class AtendimentoController {
 
         // Obter usuario por ID
         let usuario = new Usuario();
-        usuario.id = req.body.id_usuario;
+        usuario.id = req.body.usuario.id;
         usuario = await UsuarioBO.obterUsuario(usuario);
 
         // Obter habilidade por ID
         let habilidade = new Habilidade();
-        habilidade.id = req.body.id_habilidade;
+        habilidade.id = req.body.habilidade.id;
         habilidade = await HabilidadeBO.obterHabilidade(habilidade);
 
         let atendimento = new Atendimento(req.params.id, req.body.assunto, req.body.descricao, req.body.data_sugerida, null, habilidade, usuario);
