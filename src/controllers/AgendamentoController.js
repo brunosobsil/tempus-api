@@ -30,12 +30,12 @@ class AgendamentoController {
 
         // Obter usuario por ID
         let usuario = new Usuario();
-        usuario.id = req.body.id_usuario;
+        usuario.id = req.body.usuario.id;
         usuario = await UsuarioBO.obterUsuario(usuario);
 
         // Obter atendimento por ID
         let atendimento = new Atendimento();
-        atendimento.id = req.body.id_atendimento;
+        atendimento.id = req.body.atendimento.id;
         atendimento = await AtendimentoBO.obterAtendimento(atendimento);
 
         let agendamento = new Agendamento(null, req.body.data_hora_agendamento, atendimento, usuario);
@@ -53,12 +53,12 @@ class AgendamentoController {
 
         // Obter usuario por ID
         let usuario = new Usuario();
-        usuario.id = req.body.id_usuario;
+        usuario.id = req.body.usuario.id;
         usuario = await UsuarioBO.obterUsuario(usuario);
 
         // Obter atendimento por ID
         let atendimento = new Atendimento();
-        atendimento.id = req.body.id_atendimento;
+        atendimento.id = req.body.atendimento.id;
         atendimento = await AtendimentoBO.obterAtendimento(atendimento);
 
         let agendamento = new Agendamento(req.params.id, req.body.data_hora_agendamento, atendimento, usuario);

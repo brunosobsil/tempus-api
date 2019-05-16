@@ -28,8 +28,8 @@ class UsuarioController {
         // Obter cliente por ID
         let cliente = new Cliente();
 
-        if(req.body.id_cliente){
-            cliente.id = req.body.id_cliente;
+        if(req.body.cliente.id){
+            cliente.id = req.body.cliente.id;
             cliente = await ClienteBO.obterCliente(cliente);
         }
 
@@ -37,7 +37,7 @@ class UsuarioController {
         let coordenador = new Usuario();
 
         if(req.body.id_coordenador){
-            coordenador.id = req.body.id_coordenador;
+            coordenador.id = req.body.coordenador.id;
             coordenador = await UsuarioBO.obterUsuario(coordenador);
         }
 
@@ -57,8 +57,8 @@ class UsuarioController {
         // Obter cliente por ID
         let cliente = new Cliente();
 
-        if(req.body.id_cliente){
-            cliente.id = req.body.id_cliente;
+        if(req.body.cliente.id){
+            cliente.id = req.body.cliente.id;
             cliente = await ClienteBO.obterCliente(cliente);
         }
 
@@ -66,7 +66,7 @@ class UsuarioController {
         let coordenador = new Usuario();
 
         if(req.body.id_coordenador){
-            coordenador.id = req.body.id_coordenador;
+            coordenador.id = req.body.coordenador.id;
             coordenador = await UsuarioBO.obterUsuario(coordenador);
         }
 

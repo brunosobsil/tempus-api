@@ -1,14 +1,18 @@
-const { Agendamento } = require('../orm/models');
+const { Agendamento, Atendimento, Usuario } = require('../orm/models');
 
 class AgendamentoDAO {
 
     async obterAgendamento(agendamento) {
-        const agend = await Agendamento.findByPk(agendamento.id);
+        const agend = await Agendamento.findByPk(agendamento.id, {
+            include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+        });
         return agend;
     }
 
     async obterAgendamentos() {
-        const agends = await Agendamento.findAll();
+        const agends = await Agendamento.findAll({
+            include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+        });
         return agends;
     }
 

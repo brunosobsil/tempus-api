@@ -1,14 +1,18 @@
-const { Usuario } = require('../orm/models');
+const { Cliente, Usuario } = require('../orm/models');
 
 class UsuarioDAO {
 
     async obterUsuario(usuario) {
-        const user = await Usuario.findByPk(usuario.id);
+        const user = await Usuario.findByPk(usuario.id, {
+            include: [{model: Cliente, as: 'cliente'}]
+        });
         return user;
     }
 
     async obterUsuarios() {
-        const users = await Usuario.findAll();
+        const users = await Usuario.findAll({
+            include: [{model: Cliente, as: 'cliente'}]
+        });
         return users;
     }
 

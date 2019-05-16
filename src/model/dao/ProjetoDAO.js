@@ -1,14 +1,18 @@
-const { Projeto } = require('../orm/models');
+const { Atendimento, Projeto } = require('../orm/models');
 
 class ProjetoDAO {
 
     async obterProjeto(projeto) {
-        const proj = await Projeto.findByPk(projeto.id);
+        const proj = await Projeto.findByPk(projeto.id, {
+            include: [{model: Atendimento, as: 'atendimento'}]
+        });
         return proj;
     }
 
     async obterProjetos() {
-        const proj = await Projeto.findAll();
+        const proj = await Projeto.findAll({
+            include: [{model: Atendimento, as: 'atendimento'}]
+        });
         return proj;
     }
 

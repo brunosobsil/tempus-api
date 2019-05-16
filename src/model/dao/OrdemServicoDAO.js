@@ -1,14 +1,18 @@
-const { OrdemServico } = require('../orm/models');
+const { Agendamento, OrdemServico, Usuario } = require('../orm/models');
 
 class OrdemServicoDAO {
 
     async obterOrdemServico(ordemServico) {
-        const agend = await OrdemServico.findByPk(ordemServico.id);
+        const agend = await OrdemServico.findByPk(ordemServico.id, {
+            include: [{model: Agendamento, as: 'agendamento'}, {model: Usuario, as: 'usuario'}]
+        });
         return agend;
     }
 
     async obterOrdensServico() {
-        const agends = await OrdemServico.findAll();
+        const agends = await OrdemServico.findAll({
+            include: [{model: Agendamento, as: 'agendamento'}, {model: Usuario, as: 'usuario'}]
+        });
         return agends;
     }
 

@@ -27,7 +27,7 @@ class OrdemServicoController {
 
         // Obter agendamento por ID
         let agendamento = new Agendamento();
-        agendamento.id = req.body.id_agendamento;
+        agendamento.id = req.body.agendamento.id;
         agendamento = await AgendamentoBO.obterAgendamento(agendamento);
 
         let ordemServico = new OrdemServico(null, req.body.status, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, agendamento);
@@ -45,7 +45,7 @@ class OrdemServicoController {
 
         // Obter agendamento por ID
         let agendamento = new Agendamento();
-        agendamento.id = req.body.id_agendamento;
+        agendamento.id = req.body.agendamento.id;
         agendamento = await AgendamentoBO.obterAgendamento(agendamento);
 
         let ordemServico = new OrdemServico(req.params.id, req.body.status, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, agendamento);
