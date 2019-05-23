@@ -7,4 +7,7 @@ module.exports = function (app) {
     app.post('/agendamento', controller.incluirAgendamento);
     app.put('/agendamento/:id', controller.alterarAgendamento);
     app.delete('/agendamento/:id', controller.excluirAgendamento);
+    app.get('/agendamento/:data_inicio/:data_final', controller.obterAgendamento);
+    //app.get('/agendamento/disponibilidade', controller.verificarDisponibilidade);
+    //app.get('/agendamento/:id/os', controller.obterOrdensServico);
 }

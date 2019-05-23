@@ -1,4 +1,6 @@
 const { Agendamento, Atendimento, Usuario } = require('../orm/models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 class AgendamentoDAO {
 
@@ -13,6 +15,19 @@ class AgendamentoDAO {
         const agends = await Agendamento.findAll({
             include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
         });
+        return agends;
+    }
+
+    async obterAgendamentosPorPeriodo(data_inicial, data_final) {
+        const agends = await Agendamento.findAll({
+            where: {
+                data_hora_agendamento: {
+                    [Op.between]: [data_inicial, data_final]
+                }
+            },
+            include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+        });
+
         return agends;
     }
 

@@ -12,16 +12,28 @@ class AgendamentoController {
     async obterAgendamento(req, res) {
 
         if (req.params.id) {
+
             // Obter agendamento por ID 
             let agendamento = new Agendamento();
             agendamento.id = req.params.id;
             agendamento = await AgendamentoBO.obterAgendamento(agendamento);
             res.send(agendamento);
 
+        } else if(req.params.data_inicio && req.params.data_final){
+
+            // Obter agendamentos por Periodo
+            let dt_ini = new Date(req.params.data_inicio).toUTCString();
+            let dt_fin = new Date(req.params.data_final).toUTCString();
+
+            let agendamentos = await AgendamentoBO.obterAgendamentosPorPeriodo(dt_ini, dt_fin);
+            res.send(agendamentos);
+
         } else {
+
             // Obter todas as agendamentos
             let agendamentos = await AgendamentoBO.obterAgendamentos();
             res.send(agendamentos);
+
         }
 
     }

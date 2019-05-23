@@ -6,6 +6,10 @@ class AgendamentoBO {
         return dao.obterAgendamento(agendamento);
     }
 
+    obterAgendamentosPorPeriodo(data_inicial, data_final){
+        return dao.obterAgendamentosPorPeriodo(data_inicial, data_final);
+    }
+
     obterAgendamentos(){
         return dao.obterAgendamentos();
     }
