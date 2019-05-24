@@ -8,6 +8,6 @@ module.exports = function (app) {
     app.put('/agendamento/:id', controller.alterarAgendamento);
     app.delete('/agendamento/:id', controller.excluirAgendamento);
     app.get('/agendamento/:data_inicio/:data_final', controller.obterAgendamento);
-    //app.get('/agendamento/disponibilidade', controller.verificarDisponibilidade);
+    app.get('/disponibilidade/:id_usuario/:data_inicio/:data_final', controller.verificarDisponibilidade);
     //app.get('/agendamento/:id/os', controller.obterOrdensServico);
 }

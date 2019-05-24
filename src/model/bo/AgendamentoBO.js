@@ -26,6 +26,10 @@ class AgendamentoBO {
         dao.excluirAgendamento(agendamento);
     }
 
+    verificarDisponibilidade(usuario, data_inicial, data_final){
+        return dao.verificarDisponibilidade(usuario, data_inicial, data_final);
+    }
+
 }
 
 module.exports = new AgendamentoBO();

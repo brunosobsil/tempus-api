@@ -98,6 +98,19 @@ class AgendamentoController {
 
     }
 
+    async verificarDisponibilidade(req, res) {
+
+        let usuario = new Usuario();
+        usuario.id = req.params.id_usuario;
+        usuario = await UsuarioBO.obterUsuario(usuario);
+
+        let disponivel = await AgendamentoBO.verificarDisponibilidade(usuario, req.params.data_inicio, req.params.data_final);
+
+        res.status(200).json({
+            status: req.body.status,
+            message: Boolean(disponivel)
+        });
+    }
 }
 
 module.exports = AgendamentoController;
