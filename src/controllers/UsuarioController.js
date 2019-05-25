@@ -28,7 +28,7 @@ class UsuarioController {
         // Obter cliente por ID
         let cliente = new Cliente();
 
-        if(req.body.cliente.id){
+        if(req.body.id_cliente){
             cliente.id = req.body.cliente.id;
             cliente = await ClienteBO.obterCliente(cliente);
         }
