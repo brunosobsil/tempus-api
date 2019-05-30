@@ -28,7 +28,7 @@ class UsuarioController {
         // Obter cliente por ID
         let cliente = new Cliente();
 
-        if(req.body.id_cliente){
+        if(req.body.cliente.id){
             cliente.id = req.body.cliente.id;
             cliente = await ClienteBO.obterCliente(cliente);
         }
@@ -93,7 +93,6 @@ class UsuarioController {
         });
 
     }
-
 }
 
 module.exports = UsuarioController;
