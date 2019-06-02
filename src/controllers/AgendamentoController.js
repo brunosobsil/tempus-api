@@ -50,7 +50,7 @@ class AgendamentoController {
         atendimento.id = req.body.atendimento.id;
         atendimento = await AtendimentoBO.obterAtendimento(atendimento);
 
-        let agendamento = new Agendamento(null, req.body.data_hora_agendamento, atendimento, usuario);
+        let agendamento = new Agendamento(null, req.body.dataHoraAgendamento, atendimento, usuario);
         let id = await AgendamentoBO.incluirAgendamento(agendamento);
 
         res.status(201).json({
@@ -73,7 +73,7 @@ class AgendamentoController {
         atendimento.id = req.body.atendimento.id;
         atendimento = await AtendimentoBO.obterAtendimento(atendimento);
 
-        let agendamento = new Agendamento(req.params.id, req.body.data_hora_agendamento, atendimento, usuario);
+        let agendamento = new Agendamento(req.params.id, req.body.req.body.dataHoraAgendamento, atendimento, usuario);
         await AgendamentoBO.alterarAgendamento(agendamento);
 
         res.status(200).json({
