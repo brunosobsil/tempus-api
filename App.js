@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 class App {
-    
+
     constructor(){
         this.express = express();
         this.middlewares();

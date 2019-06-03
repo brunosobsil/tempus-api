@@ -51,7 +51,7 @@ class AgendamentoDAO {
 
     async incluirAgendamento(agendamento) {
         let newAgendamento = await Agendamento.create({
-            data_hora_agendamento: agendamento.dataHoraAgendamento,
+            data_hora_agendamento: agendamento.data_hora_agendamento,
             id_atendimento: agendamento.atendimento.id,
             id_usuario: agendamento.usuario.id
         });
@@ -61,7 +61,7 @@ class AgendamentoDAO {
 
     async alterarAgendamento(agendamento) {
         await Agendamento.update({
-            data_hora_agendamento: agendamento.dataHoraAgendamento,
+            data_hora_agendamento: agendamento.data_hora_agendamento,
             id_atendimento: agendamento.atendimento.id,
             id_usuario: agendamento.usuario.id
         },
