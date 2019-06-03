@@ -6,14 +6,16 @@ class AgendamentoDAO {
 
     async obterAgendamento(agendamento) {
         const agend = await Agendamento.findByPk(agendamento.id, {
-            include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+            //include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+            include: [{ all: true, nested: true }]
         });
         return agend;
     }
 
     async obterAgendamentos() {
         const agends = await Agendamento.findAll({
-            include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+            //include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+            include: [{ all: true, nested: true }]
         });
         return agends;
     }
@@ -25,7 +27,8 @@ class AgendamentoDAO {
                     [Op.between]: [data_inicial, data_final]
                 }
             },
-            include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+            //include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+            include: [{ all: true, nested: true }]
         });
 
         return agends;
@@ -39,7 +42,8 @@ class AgendamentoDAO {
                     [Op.between]: [data_inicial, data_final]
                 }
             },
-            include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+            //include: [{model: Atendimento, as: 'atendimento'},{model: Usuario, as: 'usuario'}]
+            include: [{ all: true, nested: true }]
         });
 
         return agends;
