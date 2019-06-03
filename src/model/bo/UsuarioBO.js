@@ -1,4 +1,6 @@
 const dao = require('../dao/UsuarioDAO');
+const config = require('../../../config.json');
+const bcrypt  = require('bcrypt');
 
 class UsuarioBO {
     
@@ -11,10 +13,12 @@ class UsuarioBO {
     }
 
     incluirUsuario(usuario){
+        usuario.senha = bcrypt.hashSync(usuario.senha, config.password_salt);
         return dao.incluirUsuario(usuario);
     }
 
     alterarUsuario(usuario){
+        usuario.senha = bcrypt.hashSync(usuario.senha, config.password_salt);
         dao.alterarUsuario(usuario);
     }
 

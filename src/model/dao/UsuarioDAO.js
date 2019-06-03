@@ -16,10 +16,19 @@ class UsuarioDAO {
         return users;
     }
 
+    async obterUsuarioPorEmail(usuario) {
+        const user = await Usuario.findOne({
+            where: { email: usuario.email },
+            include: [{model: Cliente, as: 'cliente'}]
+        });
+        return user;
+    }
+
     async incluirUsuario(usuario) {
         let newUser = await Usuario.create({
               nome: usuario.nome,
               endereco: usuario.endereco,
+              telefone: usuario.telefone,
               email: usuario.email,
               senha: usuario.senha,
               status: usuario.status,
@@ -36,6 +45,7 @@ class UsuarioDAO {
         await Usuario.update({
             nome: usuario.nome,
             endereco: usuario.endereco,
+            telefone: usuario.telefone,
             email: usuario.email,
             senha: usuario.senha,
             status: usuario.status,

@@ -36,12 +36,12 @@ class UsuarioController {
         // Obter coordenador por ID
         let coordenador = new Usuario();
 
-        if(req.body.id_coordenador){
+        if(req.body.coordenador.id){
             coordenador.id = req.body.coordenador.id;
             coordenador = await UsuarioBO.obterUsuario(coordenador);
         }
 
-        let usuario = new Usuario(null, req.body.nome, req.body.endereco, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
+        let usuario = new Usuario(null, req.body.nome, req.body.endereco, req.body.telefone, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
         let id = await UsuarioBO.incluirUsuario(usuario);
 
         res.status(201).json({
@@ -65,12 +65,12 @@ class UsuarioController {
         // Obter coordenador por ID
         let coordenador = new Usuario();
 
-        if(req.body.id_coordenador){
+        if(req.body.coordenador.id){
             coordenador.id = req.body.coordenador.id;
             coordenador = await UsuarioBO.obterUsuario(coordenador);
         }
 
-        let usuario = new Usuario(req.params.id, req.body.nome, req.body.endereco, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
+        let usuario = new Usuario(req.params.id, req.body.nome, req.body.endereco, req.body.telefone, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
         await UsuarioBO.alterarUsuario(usuario);
 
         res.status(200).json({
@@ -93,6 +93,7 @@ class UsuarioController {
         });
 
     }
+
 }
 
 module.exports = UsuarioController;

@@ -2,8 +2,8 @@ const Pessoa = require('./Pessoa');
 
 class PessoaJuridica extends Pessoa{
 
-    constructor(nome, endereco, email, status, razaoSocial, cnpj, nomeResponsavel){
-        super(nome, endereco, email, status);
+    constructor(nome, endereco, telefone, email, status, razaoSocial, cnpj, nomeResponsavel){
+        super(nome, endereco, telefone, email, status);
         this._razaoSocial = razaoSocial;
         this._cnpj = cnpj;
         this._nomeResponsavel = nomeResponsavel;

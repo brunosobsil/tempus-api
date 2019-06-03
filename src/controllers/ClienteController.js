@@ -22,7 +22,7 @@ class ClienteController {
 
     async incluirCliente(req, res) {
 
-        let cliente = new Cliente(null, req.body.nome, req.body.endereco, req.body.email, req.body.status, req.body.razao_social, req.body.cnpj, req.body.nome_responsavel);
+        let cliente = new Cliente(null, req.body.nome, req.body.endereco, req.body.telefone, req.body.email, req.body.status, req.body.razao_social, req.body.cnpj, req.body.nome_responsavel);
         let id = await ClienteBO.incluirCliente(cliente);
 
         res.status(201).json({
@@ -35,7 +35,7 @@ class ClienteController {
 
     async alterarCliente(req, res) {
 
-        let cliente = new Cliente(req.params.id, req.body.nome, req.body.endereco, req.body.email, req.body.status, req.body.razao_social, req.body.cnpj, req.body.nome_responsavel);
+        let cliente = new Cliente(req.params.id, req.body.nome, req.body.endereco, req.body.telefone, req.body.email, req.body.status, req.body.razao_social, req.body.cnpj, req.body.nome_responsavel);
         await ClienteBO.alterarCliente(cliente);
 
         res.status(200).json({

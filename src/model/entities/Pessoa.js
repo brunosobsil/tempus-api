@@ -1,8 +1,9 @@
 class Pessoa {
 
-    constructor(nome, endereco, email, status){
+    constructor(nome, endereco, telefone, email, status){
         this._nome = nome;
         this._endereco = endereco;
+        this._telefone = telefone;
         this._email = email;
         this._status = status;
     }
@@ -29,6 +30,14 @@ class Pessoa {
 
     set email(email){
         this._email = email;
+    }
+
+    get telefone(){
+        return this._telefone;
+    }
+
+    set telefone(telefone){
+        this._telefone = telefone;
     }
 
     get status(){

@@ -16,6 +16,7 @@ class ClienteDAO {
         let newCli = await Cliente.create({
               nome: cliente.nome,
               endereco: cliente.endereco,
+              telefone: cliente.telefone,
               email: cliente.email,
               status: cliente.status,
               razao_social: cliente.razaoSocial,
@@ -30,6 +31,7 @@ class ClienteDAO {
         await Cliente.update({
             nome: cliente.nome,
             endereco: cliente.endereco,
+            telefone: cliente.telefone,
             email: cliente.email,
             status: cliente.status,
             razao_social: cliente.razaoSocial,
