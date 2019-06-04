@@ -49,7 +49,8 @@ class AgendamentoDAO {
         return agends;
     }
 
-    async incluirAgendamento(agendamento) {
+    async incluirAgendamento(agendamento) {        
+        
         let newAgendamento = await Agendamento.create({
             data_hora_agendamento: agendamento.data_hora_agendamento,
             id_atendimento: agendamento.atendimento.id,

@@ -1,9 +1,9 @@
 class Agendamento {
 
-    constructor(id, dataHoraAgendamento, atendimento, usuario) {
+    constructor(id, data_hora_agendamento, atendimento, usuario) {
         this._id = id;
         this._usuario = usuario;
-        this._dataHoraAgendamento = dataHoraAgendamento;
+        this._data_hora_agendamento = data_hora_agendamento;
         this._atendimento = atendimento;
     }
 
@@ -15,12 +15,12 @@ class Agendamento {
         this._id = id;
     }
 
-    get dataHoraAgendamento() {
-        return this._dataHoraAgendamento;
+    get data_hora_agendamento() {
+        return this._data_hora_agendamento;
     }
 
-    set dataHoraAgendamento(dataHoraAgendamento) {
-        this._dataHoraAgendamento = dataHoraAgendamento;
+    set data_hora_agendamento(data_hora_agendamento) {
+        this._data_hora_agendamento = data_hora_agendamento;
     }
 
     get dataExclusao() {
