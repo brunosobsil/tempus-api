@@ -10,21 +10,18 @@ class AutenticacaoController {
         usuario.email = req.body.email;
 
         let auth = await AutenticacaoBO.autenticarUsuario(usuario);
-
-        if(auth){
-            res.status(200).json({
-                auth,
-                status: req.body.status,
-            })
-        }else{
-            res.status(404).json({
-                status: req.body.status,
-                message: 'falha na autenticacao'
-            })
-        }
-
+        res.send(auth);
     }
 
+    async validarToken(req, res, next) {
+        let auth = await AutenticacaoBO.validarToken(req);
+
+        if(auth !== true){
+            res.send(auth);
+        }else{
+            next();
+        }
+    }
 }
 
 module.exports = AutenticacaoController;
