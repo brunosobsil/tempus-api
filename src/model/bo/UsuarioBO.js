@@ -30,6 +30,7 @@ class UsuarioBO {
     obterHorasPorUsuarios(dt_ini, dt_fin){
         return dao.obterHorasPorUsuarios(dt_ini, dt_fin);
     }
+
 }
 
 module.exports = new UsuarioBO();

@@ -69,6 +69,7 @@ class OrdemServicoController {
                 status: req.body.status,
                 message: 'ordem de servico excluida com sucesso.'
             });
+
         }
 
     }
@@ -84,7 +85,7 @@ class OrdemServicoController {
             status: req.body.status,
             message: 'ordem de servico cancelada com sucesso'
         });
-        
+
     }
 
 }

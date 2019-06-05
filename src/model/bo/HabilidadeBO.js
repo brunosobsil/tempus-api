@@ -21,6 +21,7 @@ class HabilidadeBO {
     async excluirHabilidade(habilidade) {
         await dao.excluirHabilidade(habilidade);
     }
+
 }
 
 module.exports = new HabilidadeBO();

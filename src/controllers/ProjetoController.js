@@ -24,6 +24,7 @@ class ProjetoController {
     }
 
     async incluirProjeto(req, res) {
+
         // Obter atendimento por ID
         let atendimento = new Atendimento();
         atendimento.id = req.body.atendimento.id;
@@ -44,7 +45,7 @@ class ProjetoController {
 
         // Obter atendimento por ID
         let atendimento = new Atendimento();
-        atendimento.id = req.body.tendimento.id;
+        atendimento.id = req.body.atendimento.id;
         atendimento = await AtendimentoBO.obterAtendimento(atendimento);
 
         let projeto = new Projeto(req.params.id, req.body.nome, req.body.descricao_atividades, req.body.horas_estimadas, req.body.horas_realizadas, atendimento);

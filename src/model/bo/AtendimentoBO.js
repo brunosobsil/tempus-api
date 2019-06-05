@@ -9,7 +9,7 @@ class AtendimentoBO {
     obterAtendimentos(){
         return dao.obterAtendimentos();
     }
-    
+
     incluirAtendimento(atendimento){
         return dao.incluirAtendimento(atendimento);
     }
@@ -21,6 +21,7 @@ class AtendimentoBO {
     excluirAtendimento(atendimento){
         dao.excluirAtendimento(atendimento);
     }
+
 }
 
 module.exports = new AtendimentoBO();

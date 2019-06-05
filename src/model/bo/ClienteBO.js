@@ -21,6 +21,7 @@ class ClienteBO {
     excluirCliente(cliente){
         dao.excluirCliente(cliente);
     }
+
 }
 
 module.exports = new ClienteBO();
