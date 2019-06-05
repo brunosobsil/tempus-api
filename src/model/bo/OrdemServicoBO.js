@@ -10,6 +10,10 @@ class OrdemServicoBO {
         return dao.obterOrdensServico();
     }
 
+    obterOrdemServicoPorStatus(dt_ini, dt_fin, status) {
+        return dao.obterOrdemServicoPorStatus(dt_ini, dt_fin, status);
+    }
+
     incluirOrdemServico(OrdemServico) {
         return dao.incluirOrdemServico(OrdemServico);
     }
@@ -25,6 +29,7 @@ class OrdemServicoBO {
     cancelarOrdemServico(OrdemServico){
         dao.cancelarOrdemServico(OrdemServico);
     }
+
 }
 
 module.exports = new OrdemServicoBO();

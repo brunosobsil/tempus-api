@@ -21,6 +21,11 @@ class ProjetoBO {
     excluirProjeto(projeto){
         dao.excluirProjeto(projeto);
     }
+
+    obterHorasPorProjetos(dt_ini, dt_fin){
+        return dao.obterHorasPorProjetos(dt_ini, dt_fin);
+    }
+
 }
 
 module.exports = new ProjetoBO();

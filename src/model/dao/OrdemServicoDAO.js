@@ -3,17 +3,25 @@ const { Agendamento, OrdemServico, Usuario } = require('../orm/models');
 class OrdemServicoDAO {
 
     async obterOrdemServico(ordemServico) {
-        const agend = await OrdemServico.findByPk(ordemServico.id, {
+        const newOS = await OrdemServico.findByPk(ordemServico.id, {
             include: [{model: Agendamento, as: 'agendamento'}]
         });
-        return agend;
+        return newOS;
     }
 
     async obterOrdensServico() {
-        const agends = await OrdemServico.findAll({
+        const newOSs = await OrdemServico.findAll({
             include: [{model: Agendamento, as: 'agendamento'}]
         });
-        return agends;
+        return newOSs;
+    }
+
+    async obterOrdemServicoPorStatus(dt_inicio, dt_final, status_os) {
+        const newOSss = await OrdemServico.findAll({
+            include: [{model: Agendamento, as: 'agendamento'}],
+            where: { data_hora_inicio: dt_inicio, data_hora_final: dt_final, status: status_os }
+        });
+        return newOSss;
     }
 
     async incluirOrdemServico(ordemServico) {
