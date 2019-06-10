@@ -61,7 +61,7 @@ class OrdemServicoController {
 
         // Atualiza horas do projeto
         let projeto = new Projeto();
-        projeto.id = agendamento.atendimento.projeto;
+        projeto.id = agendamento.atendimento.Projeto.id;
         await ProjetoBO.calcularHorasProjeto(projeto);
 
         res.status(200).json({

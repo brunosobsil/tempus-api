@@ -1,17 +1,17 @@
-const { Atendimento, Habilidade, Usuario } = require('../orm/models');
+const { Atendimento, Habilidade, Usuario, Projeto} = require('../orm/models');
 
 class AtendimentoDAO {
 
     async obterAtendimento(atendimento) {
         const atend = await Atendimento.findByPk(atendimento.id,{
-            include: [{model: Habilidade, as: 'habilidade'},{model: Usuario, as: 'usuario'}]            
+            include: [{model: Habilidade, as: 'habilidade'}, {model: Usuario, as: 'usuario'}, {model: Projeto, as: 'projeto'}]
         });
         return atend;
     }
 
     async obterAtendimentos() {
         const atends = await Atendimento.findAll({
-            include: [{model: Habilidade, as: 'habilidade'},{model: Usuario, as: 'usuario'}]            
+            include: [{model: Habilidade, as: 'habilidade'}, {model: Usuario, as: 'usuario'}, {model: Projeto, as: 'projeto'}]
         });
         return atends;
     }
