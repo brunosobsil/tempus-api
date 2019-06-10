@@ -35,20 +35,24 @@ class UsuarioController {
 
         // Obter coordenador por ID
         let coordenador = new Usuario();
-
+        
         if(req.body.coordenador){
             coordenador.id = req.body.coordenador.id;
             coordenador = await UsuarioBO.obterUsuario(coordenador);
         }
 
         let usuario = new Usuario(null, req.body.nome, req.body.endereco, req.body.telefone, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
-        let id = await UsuarioBO.incluirUsuario(usuario);
+        let user = await UsuarioBO.incluirUsuario(usuario);
 
-        res.status(201).json({
-            status: req.body.status,
-            message: 'usuario inserido com sucesso',
-            id: id
-        });
+        if(user.error){
+            res.status(user.status_code).json({
+                error: user.message
+            });
+        }else{
+            res.status(201).json({
+                user
+            });
+        }
 
     }
 
@@ -71,12 +75,17 @@ class UsuarioController {
         }
 
         let usuario = new Usuario(req.params.id, req.body.nome, req.body.endereco, req.body.telefone, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
-        await UsuarioBO.alterarUsuario(usuario);
+        let user = await UsuarioBO.alterarUsuario(usuario);
 
-        res.status(200).json({
-            status: req.body.status,
-            message: 'usuario atualizado com sucesso'
-        });
+        if(user.error){
+            res.status(user.status_code).json({
+                error: user.message
+            });
+        }else{
+            res.status(200).json({
+                info: user
+            });
+        }
 
     }
 
@@ -85,12 +94,17 @@ class UsuarioController {
         let usuario = new Usuario()
         usuario.id = req.params.id;
         usuario = await UsuarioBO.obterUsuario(usuario);
-        await UsuarioBO.ativarDesativarUsuario(usuario);
+        let user = await UsuarioBO.ativarDesativarUsuario(usuario);
 
-        res.status(200).json({
-            status: req.body.status,
-            message: 'status do usuario atualizado com sucesso'
-        });
+        if(user.error){
+            res.status(user.status_code).json({
+                error: user.message
+            });
+        }else{
+            res.status(200).json({
+                info: user
+            });
+        }
 
     }
 
