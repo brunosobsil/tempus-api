@@ -35,6 +35,24 @@ class ProjetoDAO {
         return result;
     }
 
+    async calcularHorasProjeto(projeto){
+
+        let sqlQuery =  ' UPDATE "Projetos" SET horas_realizadas = (' +
+                            ' SELECT EXTRACT(epoch FROM (SUM(os.data_hora_final - os.data_hora_inicio)) / 3600)' +
+                            ' FROM "OrdemServicos" os' +
+                            ' INNER JOIN "Agendamentos" a ON a.id = os.id_agendamento' +
+                            ' INNER JOIN "Atendimentos" at ON at.id = a.id_atendimento' +
+                            ' INNER JOIN "Projetos" p ON p.id_atendimento = at.id' +
+                            ' WHERE p.id = (:id_projeto)' +
+                        ') WHERE id = (:id_projeto)';
+
+        await Projeto.sequelize.query(
+            sqlQuery, {
+            replacements: {id_projeto: projeto.id},
+            type: Projeto.sequelize.QueryTypes.UPDATE,
+        });
+    }
+
     async incluirProjeto(projeto) {
         let newProjeto = await Projeto.create({
             nome: projeto.nome,

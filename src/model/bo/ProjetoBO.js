@@ -18,6 +18,10 @@ class ProjetoBO {
         dao.alterarProjeto(projeto);
     }
 
+    calcularHorasProjeto(projeto){
+        dao.calcularHorasProjeto(projeto);
+    }
+
     excluirProjeto(projeto){
         dao.excluirProjeto(projeto);
     }
