@@ -11,6 +11,7 @@ class OrdemServicoBO {
     }
 
     obterOrdemServicoPorStatus(dt_ini, dt_fin, status) {
+        status = status.charAt(0).toUpperCase() + status.slice(1);
         return dao.obterOrdemServicoPorStatus(dt_ini, dt_fin, status);
     }
 
@@ -26,8 +27,9 @@ class OrdemServicoBO {
         dao.excluirOrdemServico(OrdemServico);
     }
 
-    cancelarOrdemServico(OrdemServico){
-        dao.cancelarOrdemServico(OrdemServico);
+    alterarStatusOrdemServico(OrdemServico){
+        OrdemServico.status = OrdemServico.status.charAt(0).toUpperCase() + OrdemServico.status.slice(1);
+        dao.alterarStatusOrdemServico(OrdemServico);
     }
 
 }

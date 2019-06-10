@@ -7,6 +7,5 @@ module.exports = function (app) {
     app.delete('/os/:id', controller.excluirOrdemServico);
     app.post('/os', controller.incluirOrdemServico);
     app.put('/os/:id', controller.alterarOrdemServico);
-    app.put('/os/:id/cancelar', controller.cancelarOrdemServico);
-    //app.put('/os/:id/aprovar', controller.aprovarOrdemServico);
+    app.put('/os/:id/status/:status', controller.alterarStatusOrdemServico);
 }

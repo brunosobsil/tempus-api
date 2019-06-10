@@ -1,4 +1,6 @@
 const { Agendamento, OrdemServico, Usuario } = require('../orm/models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 class OrdemServicoDAO {
 
@@ -17,11 +19,19 @@ class OrdemServicoDAO {
     }
 
     async obterOrdemServicoPorStatus(dt_inicio, dt_final, status_os) {
-        const newOSss = await OrdemServico.findAll({
+        const newOSs = await OrdemServico.findAll({
             include: [{model: Agendamento, as: 'agendamento'}],
-            where: { data_hora_inicio: dt_inicio, data_hora_final: dt_final, status: status_os }
+            where: {
+                data_hora_inicio: {
+                    [Op.gte]: dt_inicio
+                },
+                data_hora_final: {
+                    [Op.lte]: dt_final
+                },
+                status: status_os
+            }
         });
-        return newOSss;
+        return newOSs;
     }
 
     async incluirOrdemServico(ordemServico) {
@@ -55,7 +65,7 @@ class OrdemServicoDAO {
         });
     }
 
-    async cancelarOrdemServico(ordemServico) {
+    async alterarStatusOrdemServico(ordemServico) {
         await OrdemServico.update({
             status: ordemServico.status,
         },
