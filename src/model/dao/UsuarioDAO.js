@@ -16,9 +16,17 @@ class UsuarioDAO {
         return users;
     }
 
-    async obterUsuarioPorEmail(usuario) {
-        const user = await Usuario.findOne({
+    async obterUsuariosPorEmail(usuario) {
+        const user = await Usuario.findAll({
             where: { email: usuario.email },
+            include: [{model: Cliente, as: 'cliente'}]
+        });
+        return user;
+    }
+
+    async obterUsuariosPorCPF(usuario) {
+        const user = await Usuario.findAll({
+            where: { cpf: usuario.cpf },
             include: [{model: Cliente, as: 'cliente'}]
         });
         return user;

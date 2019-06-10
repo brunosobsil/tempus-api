@@ -8,14 +8,13 @@ class AutenticacaoBO {
     async autenticarUsuario(usuario){
 
         if(usuario.email && usuario.senha){
-            let user = await dao.obterUsuarioPorEmail(usuario);
+            let user = await dao.obterUsuariosPorEmail(usuario);
 
-            if (user) {
-
-                if (bcrypt.hashSync(usuario.senha, config.password_salt) === user.senha) {
+            if (user.length > 0) {
+                if (bcrypt.hashSync(usuario.senha, config.password_salt) === user[0].senha) {
                     var token = jwt.sign({
                         exp: Math.floor(Date.now() / 1000) + (60 * 60),
-                        data: user.id,
+                        data: user[0].id,
                     }, config.jwt_hash);
 
                     return {
