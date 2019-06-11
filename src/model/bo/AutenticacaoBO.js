@@ -49,7 +49,11 @@ class AutenticacaoBO {
     }
 
     async validarToken(req) {
-        if(req.url === '/login'){
+
+        let requestSegments = req.path.split('/');
+
+        // Verifica se pode ser acessado sem autenticação
+        if(config.unsafe_routes.indexOf(requestSegments[1]) >= 0){
             return true;
         }else{
 

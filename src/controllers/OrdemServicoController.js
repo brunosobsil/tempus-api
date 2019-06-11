@@ -7,6 +7,8 @@ const AgendamentoBO = require('../model/bo/AgendamentoBO');
 const Projeto = require('../model/entities/Projeto');
 const ProjetoBO = require('../model/bo/ProjetoBO');
 
+const path = require('path');
+
 class OrdemServicoController {
 
     async obterOrdemServico(req, res) {
@@ -112,11 +114,7 @@ class OrdemServicoController {
         ordemServico.status = req.params.status;
         await OrdemServicoBO.alterarStatusOrdemServico(ordemServico);
 
-        res.status(200).json({
-            status: req.body.status,
-            message: 'status da ordem de servico atualizado com sucesso'
-        });
-
+        res.sendFile(path.resolve("./src/template/validar-os.html"));
     }
 
 }
