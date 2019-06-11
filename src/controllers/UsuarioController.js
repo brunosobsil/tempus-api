@@ -42,15 +42,15 @@ class UsuarioController {
         }
 
         let usuario = new Usuario(null, req.body.nome, req.body.endereco, req.body.telefone, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
-        let user = await UsuarioBO.incluirUsuario(usuario);
+        let id_gerado = await UsuarioBO.incluirUsuario(usuario);
 
-        if(user.error){
-            res.status(user.status_code).json({
-                error: user.message
+        if(! id_gerado){
+            res.status(500).json({
+                error: 'erro ao cadastrar usuario.'
             });
         }else{
             res.status(201).json({
-                user
+                id: id_gerado
             });
         }
 

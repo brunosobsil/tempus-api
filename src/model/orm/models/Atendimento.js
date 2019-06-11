@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Atendimento.associate = models => {
-        Atendimento.hasOne(models.Projeto, {foreignKey: 'id_atendimento'})
+        Atendimento.hasOne(models.Projeto, {foreignKey: 'id_atendimento', as: 'projeto'})
         Atendimento.belongsTo(models.Usuario, {
             as: 'usuario',
             foreignKey : 'id_usuario',

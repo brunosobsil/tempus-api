@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <title>Aprova&ccedil;&atilde;o de Ordem de Servi&ccedil;o</title>
+    </head>
+    <body>
+        <div>
+            <p>
+                Prezado(a) sr(a) %nome_aprovador%<br><br>
+                Foi solicitada a sua aprova&ccedil;&atilde;o para a Ordem de Servi&ccedil;o a seguir:<br><br>
+            </p>
+            
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>N&uacute;mero:</td>
+                        <td>%numero_os%</td>
+                    </tr>
+                    <tr>
+                        <td>Data:</td>
+                        <td>%data_os%</td>
+                    </tr>
+                    <tr>
+                        <td>Hora In&iacute;cio:</td>
+                        <td>%hora_inicio_os%</td>
+                    </tr>
+                    <tr>
+                        <td>Hora Fim:</td>
+                        <td>%hora_fim_os%</td>
+                    </tr>
+                    <tr>
+                        <td>Descricao das atividades:</td>
+                        <td>%descricao_os%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href='http://localhost:3000/aprovacao/os/%id_os%/Aprovada'><button class="btn btn-primary">Aprovar</button></a>
+            <a href='http://localhost:3000/aprovacao/os/%id_os%/Rejeitada'><button class="btn btn-danger">Rejeitar</button></a>
+        </div>
+
+    </body>
+</html>
