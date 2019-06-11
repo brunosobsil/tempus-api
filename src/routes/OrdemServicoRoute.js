@@ -7,5 +7,5 @@ module.exports = function (app) {
     app.delete('/os/:id', controller.excluirOrdemServico);
     app.post('/os', controller.incluirOrdemServico);
     app.put('/os/:id', controller.alterarOrdemServico);
-    app.get('/qualificar/os/:id/status/:status', controller.alterarStatusOrdemServico);
+    app.get('/aprovacao/os/:id/:status', controller.alterarStatusOrdemServico);
 }
