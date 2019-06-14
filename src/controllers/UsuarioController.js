@@ -41,7 +41,23 @@ class UsuarioController {
             coordenador = await UsuarioBO.obterUsuario(coordenador);
         }
 
-        let usuario = new Usuario(null, req.body.nome, req.body.endereco, req.body.telefone, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
+        let usuario = new Usuario( null, 
+                                   req.body.nome, 
+                                   req.body.endereco, 
+                                   req.body.numero, 
+                                   req.body.complemento, 
+                                   req.body.bairro, 
+                                   req.body.cidade, 
+                                   req.body.uf, 
+                                   req.body.cep,
+                                   req.body.telefone, 
+                                   req.body.email, 
+                                   req.body.status, 
+                                   req.body.cpf, 
+                                   req.body.perfil, 
+                                   req.body.senha,
+                                   coordenador, 
+                                   cliente);
         let id_gerado = await UsuarioBO.incluirUsuario(usuario);
 
         if(! id_gerado){
@@ -74,7 +90,23 @@ class UsuarioController {
             coordenador = await UsuarioBO.obterUsuario(coordenador);
         }
 
-        let usuario = new Usuario(req.params.id, req.body.nome, req.body.endereco, req.body.telefone, req.body.email, req.body.senha, req.body.status, req.body.cpf, req.body.perfil, coordenador, cliente);
+        let usuario = new Usuario(req.params.id,
+                                  req.body.nome, 
+                                  req.body.endereco, 
+                                  req.body.numero, 
+                                  req.body.complemento, 
+                                  req.body.bairro, 
+                                  req.body.cidade, 
+                                  req.body.uf, 
+                                  req.body.cep,
+                                  req.body.telefone, 
+                                  req.body.email, 
+                                  req.body.status, 
+                                  req.body.cpf, 
+                                  req.body.perfil, 
+                                  req.body.senha,
+                                  coordenador, 
+                                  cliente);
         let user = await UsuarioBO.alterarUsuario(usuario);
 
         if(user.error){

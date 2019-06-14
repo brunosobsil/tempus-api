@@ -21,7 +21,14 @@ async function incluir(){
 
     let t = new Usuario();
     t.nome = "Maria Fernanda";
-    t.endereco = "Av. das Americas 10005";
+    t.endereco = "Av. das Americas";
+    t.numero = "124";
+    t.complemento = "casa 1";
+    t.bairro = "Barra";
+    t.cidade = "Rio de Janeiro";
+    t.uf = "RJ";
+    t.cep = "20541120";
+    t.telefone = "2199999999";
     t.email = "maria@eu.com";
     t.senha = "123456";
     t.status = true;
@@ -29,6 +36,7 @@ async function incluir(){
     t.perfil = 1;
     t.cliente = c;
     t.coordenador = new Usuario();
+    t.coordenador.id = 1;
 
     let id = await UsuarioDAO.incluirUsuario(t);
 
