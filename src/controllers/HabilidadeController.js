@@ -21,41 +21,54 @@ class HabilidadeController {
     }
 
     async incluirHabilidade(req, res) {
-
+        let result;
         let habilidade = new Habilidade(null, req.body.nome, req.body.descricao);
-        let id = await HabilidadeBO.incluirHabilidade(habilidade);
-        
-        res.status(201).json({
-            status: req.body.status,
-            message: 'habilidade inserida com sucesso',
-            id: id
-        });
+        habilidade = await HabilidadeBO.incluirHabilidade(habilidade);
+
+        if(habilidade.error) {
+            result = { error: habilidade.message };
+        } else {
+            result = { id: habilidade.body, status: req.body.status, message: habilidade.message };
+        }
+
+        res.status(habilidade.status_code).json(result);
 
     }
 
     async alterarHabilidade(req, res) {
 
         let habilidade = new Habilidade(req.params.id, req.body.nome, req.body.descricao);
-        await HabilidadeBO.alterarHabilidade(habilidade);
-        
-        res.status(200).json({
-            status: req.body.status,
-            message: 'habilidade atualizada com sucesso'
-        });
+        habilidade = await HabilidadeBO.alterarHabilidade(habilidade);
+        let result;
+
+        if(habilidade.error) {
+            result = { error: habilidade.message }
+        } else {
+            result = { status: req.body.status, message: habilidade.message }
+        }
+
+        res.status(habilidade.status_code).json(result);
 
     }
 
     async excluirHabilidade(req, res) {
 
+        let habilidade = new Habilidade();
+        let result;
+
         if (req.params.id) {
-            let habilidade = new Habilidade();
             habilidade.id = req.params.id;
-            await HabilidadeBO.excluirHabilidade(habilidade);
-            res.status(200).json({
-                status: req.body.status,
-                message: 'habilidade excluida com sucesso.'
-            });
         }
+
+        habilidade = await HabilidadeBO.excluirHabilidade(habilidade);
+
+        if(habilidade.error) {
+            result = { error: habilidade.message }
+        } else {
+            result = { status: req.body.status, message: habilidade.message }
+        }
+
+        res.status(habilidade.status_code).json(result);
 
     }
 
