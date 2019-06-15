@@ -3,7 +3,7 @@ const PessoaFisica = require('./PessoaFisica');
 class Usuario extends PessoaFisica {
 
     constructor(id, nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status, cpf, perfil, senha, coordenador, cliente) {
-        super(id, nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status, cpf);
+        super(nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status, cpf);
         this._coordenador = coordenador;
         this._cliente = cliente;
         this._perfil = perfil;
