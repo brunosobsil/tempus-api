@@ -2,19 +2,19 @@ const Pessoa = require('./Pessoa');
 
 class PessoaJuridica extends Pessoa{
 
-    constructor(nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status, razaoSocial, cnpj, nomeResponsavel){
+    constructor(nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status, razao_social, cnpj, nome_responsavel){
         super(nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status);
-        this._razaoSocial = razaoSocial;
+        this._nome_responsavel = nome_responsavel;
+        this._razao_social = razao_social;
         this._cnpj = cnpj;
-        this._nomeResponsavel = nomeResponsavel;
     }
 
-    get razaoSocial(){
-        return this._razaoSocial;
+    get razao_social(){
+        return this._razao_social;
     }
 
-    set razaoSocial(razaoSocial){
-        this._razaoSocial = razaoSocial;
+    set razao_social(razao_social){
+        this._razao_social = razao_social;
     }
 
     get cnpj(){
@@ -25,12 +25,12 @@ class PessoaJuridica extends Pessoa{
         this._cnpj = cnpj;
     }
 
-    get nomeResponsavel(){
-        return this._nomeResponsavel;
+    get nome_responsavel(){
+        return this._nome_responsavel;
     }
 
-    set nomeResponsavel(nomeResponsavel){
-        this._nomeResponsavel = nomeResponsavel;
+    set nome_responsavel(nome_responsavel){
+        this._nome_responsavel = nome_responsavel;
     }
 
 }

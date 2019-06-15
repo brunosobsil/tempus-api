@@ -1,4 +1,5 @@
 const dao = require('../dao/ClienteDAO');
+const cnpj = require('@fnando/cnpj/dist/node');
 
 class ClienteBO {
     
@@ -10,16 +11,172 @@ class ClienteBO {
         return dao.obterClientes();
     }
 
-    incluirCliente(cliente){
-        return dao.incluirCliente(cliente);
+    async incluirCliente(cliente){
+        const error = new Array();
+        let cli = await dao.obterClientes();
+
+        if (cli.length > 0) {
+            if(cli.some(item => item.razao_social === cliente.razao_social)){
+                error.push('já existe um cliente com essa razao social');
+            }
+
+            if(cli.some(item => item.email === cliente.email)){
+                error.push('já existe um cliente com esse email');
+            }
+
+            if(cli.some(item => item.cnpj === cliente.cnpj)){
+                error.push('já existe um cliente com esse cnpj');
+            }
+
+            if(!cnpj.isValid(cliente.cnpj)) {
+                error.push('CNPJ inválido');
+            }
+        }
+
+        if (error.length > 0) {
+            return {
+                error: true,
+                status_code: 409,
+                status_message: 'Conflict',
+                message: error
+            }
+        } else {
+            try {
+                cli = await dao.incluirCliente(cliente);
+
+                return {
+                    error: false,
+                    status_code: 201,
+                    status_message: 'Created',
+                    message: 'cliente inserido com sucesso',
+                    body: cli
+                }
+
+            } catch (error) {
+                return {
+                    error: true,
+                    status_code: 500,
+                    status_message: 'Server Error',
+                    message: 'erro ao inserir cliente: ' + JSON.stringify(error)
+                };
+            }
+        }
+
     }
 
-    alterarCliente(cliente){
-        dao.alterarCliente(cliente);
+    async alterarCliente(cliente){
+        const error = new Array();
+
+        if (cliente.id) {
+            let cli = await dao.obterCliente(cliente);
+
+            if (cli != null) {
+                cli = await dao.obterClientes();
+
+                if (cli.length > 0) {
+                    if(cli.some(item => item.razao_social === cliente.razao_social && item.id != cliente.id)){
+                        error.push('já existe um cliente com essa razao social');
+                    }
+
+                    if(cli.some(item => item.email === cliente.email && item.id != cliente.id)){
+                        error.push('já existe um cliente com esse email');
+                    }
+
+                    if(cli.some(item => item.cnpj === cliente.cnpj && item.id != cliente.id)){
+                        error.push('já existe um cliente com esse cnpj');
+                    }
+
+                    if(!cnpj.isValid(cliente.cnpj)) {
+                        error.push('CNPJ inválido');
+                    }
+                }
+
+                if (error.length > 0) {
+                    return {
+                        error: true,
+                        status_code: 409,
+                        status_message: 'Conflict',
+                        message: error
+                    }
+                } else {
+                    try {
+                        cli = await dao.alterarCliente(cliente);
+
+                        return {
+                            error: false,
+                            status_code: 200,
+                            status_message: 'OK',
+                            message: 'cliente alterado com sucesso'
+                        }
+
+                    } catch (error) {
+                        return {
+                            error: true,
+                            status_code: 500,
+                            status_message: 'Server Error',
+                            message: 'erro ao alterar cliente'
+                        };
+                    }
+                }
+            } else {
+                return {
+                    error: true,
+                    status_code: 404,
+                    status_message: 'Not Found',
+                    message: 'cliente não existe'
+                }
+            }
+        } else {
+            return {
+                error: true,
+                status_code: 409,
+                status_message: 'Conflict',
+                message: 'necessario informar o id do cliente'
+            };
+        }
+
     }
 
-    excluirCliente(cliente){
-        dao.excluirCliente(cliente);
+    async excluirCliente(cliente){
+        const error = new Array();
+
+        if (cliente.id) {
+            let cli = await dao.obterCliente(cliente);
+
+            if (cli) {
+                try {
+                    dao.excluirCliente(cliente);
+
+                    return {
+                        error: false,
+                        status_code: 200,
+                        message: 'cliente excluido com sucesso'
+                    }
+                } catch (error) {
+                    return {
+                        error: true,
+                        status_code: 500,
+                        status_message: 'Server Error',
+                        message: 'erro ao excluir cliente'
+                    };
+                }
+            } else {
+                return {
+                    error: true,
+                    status_code: 404,
+                    status_message: 'Not Found',
+                    message: 'cliente não existe'
+                }
+            }
+        } else {
+            return {
+                error: true,
+                status_code: 409,
+                status_message: 'Conflict',
+                message: 'necessario informar o id do cliente'
+            };
+        }
+
     }
 
 }

@@ -2,8 +2,8 @@ const PessoaJuridica = require('./PessoaJuridica');
 
 class Cliente extends PessoaJuridica {
 
-    constructor(id, nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status, razaoSocial, cnpj, nomeResponsavel) {
-        super(nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status, razaoSocial, cnpj, nomeResponsavel);
+    constructor(id, nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status, razao_social, cnpj, nome_responsavel) {
+        super(nome, endereco, numero, complemento, bairro, cidade, uf, cep, telefone, email, status, razao_social, cnpj, nome_responsavel);
         this._id = id;
     }
 

@@ -22,6 +22,7 @@ class ClienteController {
 
     async incluirCliente(req, res) {
 
+        let result;
         let cliente = new Cliente( null,
                                    req.body.nome, 
                                    req.body.endereco,
@@ -37,18 +38,21 @@ class ClienteController {
                                    req.body.razao_social, 
                                    req.body.cnpj, 
                                    req.body.nome_responsavel);
-        let id = await ClienteBO.incluirCliente(cliente);
+        cliente = await ClienteBO.incluirCliente(cliente);
 
-        res.status(201).json({
-            status: req.body.status,
-            message: 'cliente inserido com sucesso',
-            id: id
-        });
+        if(cliente.error) {
+            result = { error: cliente.message };
+        } else {
+            result = { id: cliente.body, status: req.body.status, message: cliente.message };
+        }
+
+        res.status(cliente.status_code).json(result);
 
     }
 
     async alterarCliente(req, res) {
 
+        let result;
         let cliente = new Cliente( req.params.id, 
                                    req.body.nome, 
                                    req.body.endereco,
@@ -64,27 +68,35 @@ class ClienteController {
                                    req.body.razao_social, 
                                    req.body.cnpj, 
                                    req.body.nome_responsavel);
-        await ClienteBO.alterarCliente(cliente);
+        cliente = await ClienteBO.alterarCliente(cliente);
 
-        res.status(200).json({
-            status: req.body.status,
-            message: 'cliente atualizado com sucesso'
-        });
+        if(cliente.error) {
+            result = { error: cliente.message };
+        } else {
+            result = { status: req.body.status, message: cliente.message };
+        }
+
+        res.status(cliente.status_code).json(result);
 
     }
 
     async excluirCliente(req, res) {
+        let cliente = new Cliente();
+        let result;
 
         if (req.params.id) {
-            let cliente = new Cliente();
             cliente.id = req.params.id;
-            await ClienteBO.excluirCliente(cliente);
-            res.status(200).json({
-                status: req.body.status,
-                message: 'cliente excluido com sucesso.'
-            });
         }
 
+        cliente = await ClienteBO.excluirCliente(cliente);
+
+        if(cliente.error) {
+            result = { error: cliente.message }
+        } else {
+            result = { status: req.body.status, message: cliente.message }
+        }
+
+        res.status(cliente.status_code).json(result);
     }
 
 }

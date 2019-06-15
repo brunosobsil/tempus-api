@@ -25,9 +25,9 @@ class ClienteDAO {
               telefone: cliente.telefone,
               email: cliente.email,
               status: cliente.status,
-              razao_social: cliente.razaoSocial,
+              razao_social: cliente.razao_social,
               cnpj: cliente.cnpj,
-              nome_responsavel: cliente.nomeResponsavel
+              nome_responsavel: cliente.nome_responsavel
         });
 
         return newCli.id;
@@ -46,9 +46,9 @@ class ClienteDAO {
             telefone: cliente.telefone,
             email: cliente.email,
             status: cliente.status,
-            razao_social: cliente.razaoSocial,
+            razao_social: cliente.razao_social,
             cnpj: cliente.cnpj,
-            nome_responsavel: cliente.nomeResponsavel
+            nome_responsavel: cliente.nome_responsavel
         }, {
             where: { id: cliente.id }
         });

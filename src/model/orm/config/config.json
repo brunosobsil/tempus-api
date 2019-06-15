@@ -5,7 +5,11 @@
     "database": "tempus",
     "host": "localhost",
     "dialect": "postgres",
+    "logging": false,
     "operatorsAliases": false,
-    "logging": false
+    "define": {
+      "underscored": true, 
+      "freezeTableName": false
+    }
   }
 }
