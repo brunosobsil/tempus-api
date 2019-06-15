@@ -38,10 +38,12 @@ class OrdemServicoController {
         let ordemServico = new OrdemServico(null, req.body.status, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, agendamento);
         ordemServico = await OrdemServicoBO.incluirOrdemServico(ordemServico);
 
-        // Atualiza horas do projeto
-        let projeto = new Projeto();
-        projeto.id = agendamento.atendimento.projeto.id;
-        await ProjetoBO.calcularHorasProjeto(projeto);
+        if(agendamento.atendimento.projeto){
+            // Atualiza horas do projeto
+            let projeto = new Projeto();
+            projeto.id = agendamento.atendimento.projeto.id;
+            await ProjetoBO.calcularHorasProjeto(projeto);
+        }
 
         res.status(201).json({
             status: req.body.status,
@@ -61,10 +63,12 @@ class OrdemServicoController {
         let ordemServico = new OrdemServico(req.params.id, req.body.status, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, agendamento);
         await OrdemServicoBO.alterarOrdemServico(ordemServico);
 
-        // Atualiza horas do projeto
-        let projeto = new Projeto();
-        projeto.id = agendamento.atendimento.Projeto.id;
-        await ProjetoBO.calcularHorasProjeto(projeto);
+        if(agendamento.atendimento.projeto){
+            // Atualiza horas do projeto
+            let projeto = new Projeto();
+            projeto.id = agendamento.atendimento.projeto.id;
+            await ProjetoBO.calcularHorasProjeto(projeto);
+        }
 
         res.status(200).json({
             status: req.body.status,
@@ -91,10 +95,12 @@ class OrdemServicoController {
             ordemServico.id = req.params.id;
             await OrdemServicoBO.excluirOrdemServico(ordemServico);
 
-            // Atualizar horas do projeto
-            let projeto = new Projeto();
-            projeto.id = agendamento.atendimento.projeto.id;
-            await ProjetoBO.calcularHorasProjeto(projeto);
+            if(agendamento.atendimento.projeto){
+                // Atualizar horas do projeto
+                let projeto = new Projeto();
+                projeto.id = agendamento.atendimento.projeto.id;
+                await ProjetoBO.calcularHorasProjeto(projeto);
+            }
 
             res.status(200).json({
                 status: req.body.status,
