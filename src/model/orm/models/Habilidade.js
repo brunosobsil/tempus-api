@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
 
     const Habilidade = sequelize.define('Habilidade',{
-        nome: DataTypes.STRING,
-        descricao: {type: DataTypes.STRING, unique: true}
+        nome: {type: DataTypes.STRING, unique: true},
+        descricao: DataTypes.STRING
     });
 
     Habilidade.associate = models => {
