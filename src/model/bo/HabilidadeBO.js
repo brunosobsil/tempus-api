@@ -12,7 +12,6 @@ class HabilidadeBO {
 
     async incluirHabilidade(habilidade) {
 
-        const error = new Array();
         let hab = await dao.obterHabilidades();
 
         if(hab.length > 0){
@@ -49,12 +48,9 @@ class HabilidadeBO {
 
     async alterarHabilidade(habilidade) {
 
-        let hab;
-        const error = new Array();
-
         if (habilidade.id) {
 
-            hab = await dao.obterHabilidade(habilidade);
+            let hab = await dao.obterHabilidade(habilidade);
 
             if (hab != null) {
                 hab = await dao.obterHabilidades();
@@ -108,8 +104,6 @@ class HabilidadeBO {
     }
 
     async excluirHabilidade(habilidade) {
-
-        const error = new Array();
 
         if (habilidade.id) {
             let hab = await dao.obterHabilidade(habilidade);

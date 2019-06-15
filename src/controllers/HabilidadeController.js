@@ -21,9 +21,9 @@ class HabilidadeController {
     }
 
     async incluirHabilidade(req, res) {
-        let result;
         let habilidade = new Habilidade(null, req.body.nome, req.body.descricao);
         habilidade = await HabilidadeBO.incluirHabilidade(habilidade);
+        let result;
 
         if(habilidade.error) {
             result = { error: habilidade.message };
