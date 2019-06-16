@@ -24,8 +24,7 @@ class UsuarioController {
     }
 
     async incluirUsuario(req, res) {
-
-        console.log(req.body);
+        let result;
 
         // Obter cliente por ID
         let cliente = new Cliente();
@@ -37,7 +36,7 @@ class UsuarioController {
 
         // Obter coordenador por ID
         let coordenador = new Usuario();
-        
+
         if(req.body.coordenador){
             coordenador.id = req.body.coordenador.id;
             coordenador = await UsuarioBO.obterUsuario(coordenador);
@@ -60,21 +59,19 @@ class UsuarioController {
                                    req.body.senha,
                                    coordenador, 
                                    cliente);
-        let id_gerado = await UsuarioBO.incluirUsuario(usuario);
+        usuario = await UsuarioBO.incluirUsuario(usuario);
 
-        if(! id_gerado){
-            res.status(500).json({
-                error: 'erro ao cadastrar usuario.'
-            });
-        }else{
-            res.status(201).json({
-                id: id_gerado
-            });
+        if(usuario.error) {
+            result = { error: usuario.message };
+        } else {
+            result = { id: usuario.body };
         }
 
+        res.status(usuario.status_code).json(result);
     }
 
     async alterarUsuario(req, res) {
+        let result;
 
         // Obter cliente por ID
         let cliente = new Cliente();
@@ -109,36 +106,35 @@ class UsuarioController {
                                   req.body.senha,
                                   coordenador, 
                                   cliente);
-        let user = await UsuarioBO.alterarUsuario(usuario);
+        usuario = await UsuarioBO.alterarUsuario(usuario);
 
-        if(user.error){
-            res.status(user.status_code).json({
-                error: user.message
-            });
-        }else{
-            res.status(200).json({
-                info: user
-            });
+        if(usuario.error) {
+            result = { error: usuario.message };
+        } else {
+            result = { info: usuario };
         }
 
+        res.status(usuario.status_code).json(result);
     }
 
     async alterarStatusUsuario(req, res) {
 
-        let usuario = new Usuario()
-        usuario.id = req.params.id;
-        usuario = await UsuarioBO.obterUsuario(usuario);
-        let user = await UsuarioBO.ativarDesativarUsuario(usuario);
+        let usuario = new Usuario();
+        let result;
 
-        if(user.error){
-            res.status(user.status_code).json({
-                error: user.message
-            });
-        }else{
-            res.status(200).json({
-                info: user
-            });
+        if (req.params.id) {
+            usuario.id = req.params.id;
         }
+
+        let usu = await UsuarioBO.ativarDesativarUsuario(usuario);
+
+        if(usu.error) {
+            result = { error: usu.message }
+        } else {
+            result = { info: usu}
+        }
+
+        res.status(usu.status_code).json(result);
 
     }
 
