@@ -16,9 +16,6 @@ class ClienteBO {
         let cli = await dao.obterClientes();
 
         if (cli.length > 0) {
-            if(cli.some(item => item.razao_social === cliente.razao_social)){
-                error.push('já existe um cliente com essa razao social');
-            }
 
             if(cli.some(item => item.email === cliente.email)){
                 error.push('já existe um cliente com esse email');
@@ -74,9 +71,6 @@ class ClienteBO {
                 cli = await dao.obterClientes();
 
                 if (cli.length > 0) {
-                    if(cli.some(item => item.razao_social === cliente.razao_social && item.id != cliente.id)){
-                        error.push('já existe um cliente com essa razao social');
-                    }
 
                     if(cli.some(item => item.email === cliente.email && item.id != cliente.id)){
                         error.push('já existe um cliente com esse email');
