@@ -32,18 +32,24 @@ class UsuarioHabilidadeController {
 
         // Obter habilidade por ID
         let habilidade = new Habilidade();
-        habilidade.id = req.body.habilidade.id;
-        habilidade = await HabilidadeBO.obterHabilidade(habilidade);
+        if (req.body.habilidade) {
+            habilidade.id = req.body.habilidade.id;
+            habilidade = await HabilidadeBO.obterHabilidade(habilidade);
+        }
 
         // Define Usuario habilidade
         let usuHabilidade = new UsuarioHabilidade(req.body.nivel, usuario, habilidade);
-        let id = await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
-        
-        res.status(201).json({
-            status: req.body.status,
-            message: 'associacao entre usuario e habilidade realizada com sucesso',
-            id: id
-        });
+        usuHabilidade = await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
+
+        let result;
+
+        if(usuHabilidade.error) {
+            result = { error: usuHabilidade.message };
+        } else {
+            result = { id: usuHabilidade.body, status: req.body.status, message: usuHabilidade.message };
+        }
+
+        res.status(usuHabilidade.status_code).json(result);
 
     }
 
@@ -62,14 +68,19 @@ class UsuarioHabilidadeController {
             habilidade = await HabilidadeBO.obterHabilidade(habilidade);
 
             let usuHabilidade = new UsuarioHabilidade(habilidades[i].nivel, usuario, habilidade);
-            await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
+            let usuHabs = await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
 
         }
-        
-        res.status(201).json({
-            status: req.body.status,
-            message: 'associacao entre usuario e habilidades realizada com sucesso'
-        });
+
+        let result;
+
+        if(usuHabilidade.error) {
+            result = { error: usuHabilidade.message };
+        } else {
+            result = { status: req.body.status, message: usuHabilidade.message };
+        }
+
+        res.status(usuHabilidade.status_code).json(result);
 
     }
 
@@ -82,17 +93,23 @@ class UsuarioHabilidadeController {
 
         // Obter habilidade por ID
         let habilidade = new Habilidade();
-        habilidade.id = req.params.id_habilidade;
-        habilidade = await HabilidadeBO.obterHabilidade(habilidade);
+        if (req.params.id_habilidade) {
+            habilidade.id = req.params.id_habilidade;
+            habilidade = await HabilidadeBO.obterHabilidade(habilidade);
+        }
 
         let usuHabilidade = new UsuarioHabilidade(null, usuario, habilidade);
+        usuHabilidade = await UsuarioHabilidadeBO.excluirUsuarioHabilidade(usuHabilidade);
 
-        await UsuarioHabilidadeBO.excluirUsuarioHabilidade(usuHabilidade);
+        let result;
 
-        res.status(201).json({
-            status: req.body.status,
-            message: 'associacao entre usuario e habilidade excluida com sucesso'
-        });
+        if(usuHabilidade.error) {
+            result = { error: usuHabilidade.message };
+        } else {
+            result = { status: req.body.status, message: usuHabilidade.message };
+        }
+
+        res.status(usuHabilidade.status_code).json(result);
 
     }
 
@@ -104,13 +121,17 @@ class UsuarioHabilidadeController {
         usuario = await UsuarioBO.obterUsuario(usuario);
 
         let usuHabilidade = new UsuarioHabilidade(null, usuario, null);
+        usuHabilidade = await UsuarioHabilidadeBO.excluirUsuarioHabilidades(usuHabilidade);
 
-        await UsuarioHabilidadeBO.excluirUsuarioHabilidades(usuHabilidade);
+        let result;
 
-        res.status(201).json({
-            status: req.body.status,
-            message: 'associacao entre usuario e habilidade excluida com sucesso'
-        });
+        if(usuHabilidade.error) {
+            result = { error: usuHabilidade.message };
+        } else {
+            result = { status: req.body.status, message: usuHabilidade.message };
+        }
+
+        res.status(usuHabilidade.status_code).json(result);
 
     }
 
@@ -123,17 +144,23 @@ class UsuarioHabilidadeController {
 
         // Obter habilidade por ID
         let habilidade = new Habilidade();
-        habilidade.id = req.params.id_habilidade;
-        habilidade = await HabilidadeBO.obterHabilidade(habilidade);
+        if (req.params.id_habilidade) {
+            habilidade.id = req.params.id_habilidade;
+            habilidade = await HabilidadeBO.obterHabilidade(habilidade);
+        }
 
         let usuHabilidade = new UsuarioHabilidade(req.body.nivel, usuario, habilidade);
+        usuHabilidade = await UsuarioHabilidadeBO.alterarUsuarioHabilidade(usuHabilidade);
 
-        await UsuarioHabilidadeBO.alterarUsuarioHabilidade(usuHabilidade);
+        let result;
 
-        res.status(200).json({
-            status: req.body.status,
-            message: 'associacao entre usuario e habilidade atualizada com sucesso'
-        });
+        if(usuHabilidade.error) {
+            result = { error: usuHabilidade.message };
+        } else {
+            result = { status: req.body.status, message: usuHabilidade.message };
+        }
+
+        res.status(usuHabilidade.status_code).json(result);
 
     }
 
