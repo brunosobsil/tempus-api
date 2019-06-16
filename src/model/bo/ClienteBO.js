@@ -1,4 +1,5 @@
 const dao = require('../dao/ClienteDAO');
+const daoUsuario = require('../dao/UsuarioDAO');
 const cnpj = require('@fnando/cnpj/dist/node');
 
 class ClienteBO {
@@ -138,6 +139,17 @@ class ClienteBO {
             let cli = await dao.obterCliente(cliente);
 
             if (cli) {
+
+                let users = await daoUsuario.obterUsuariosPorCliente(cliente);
+                if(users.length > 0){
+                    return {
+                        error: true,
+                        status_code: 409,
+                        status_message: 'Integrity Failure',
+                        message: 'Esse cliente não poderá ser excluído pois existem usuários associados a esse cliente.'
+                    };
+                }
+
                 try {
                     dao.excluirCliente(cliente);
 

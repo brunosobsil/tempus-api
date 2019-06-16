@@ -25,8 +25,6 @@ class UsuarioController {
 
     async incluirUsuario(req, res) {
 
-        console.log(req.body);
-
         // Obter cliente por ID
         let cliente = new Cliente();
 

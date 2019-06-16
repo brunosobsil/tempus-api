@@ -32,6 +32,14 @@ class UsuarioDAO {
         return user;
     }
 
+    async obterUsuariosPorCliente(cliente) {
+        const user = await Usuario.findAll({
+            where: { id_cliente: cliente.id },
+            include: [{model: Cliente, as: 'cliente'}]
+        });
+        return user;
+    }
+
     async obterHorasPorUsuarios(dt_ini, dt_fin){
         const sqlQuery =  ' SELECT u.id, u.nome, EXTRACT(epoch FROM (SUM(os.data_hora_final - os.data_hora_inicio)) / 3600) as total' +
                         ' FROM "OrdemServicos" os' +

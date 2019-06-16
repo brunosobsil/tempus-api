@@ -11,6 +11,15 @@ class UsuarioHabilidadeDAO {
         return usuHabilidade;
     }
 
+    async obterUsuariosPorHabilidade(habilidade){
+        const usuHabilidade = await UsuarioHabilidade.findAll({
+            include: [{model: Habilidade, as: 'habilidade'},{model: Usuario, as: 'usuario'}],
+            where: { id_habilidade: habilidade.id }
+        });
+
+        return usuHabilidade;
+    }
+
     async incluirUsuarioHabilidade(usuarioHabilidade){
         let habUsu = await UsuarioHabilidade.create({
             nivel: usuarioHabilidade.nivel,

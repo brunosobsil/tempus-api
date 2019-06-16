@@ -1,4 +1,5 @@
 const dao = require('../dao/HabilidadeDAO');
+const daoUsuarioHab = require('../dao/UsuarioHabilidadeDAO');
 
 class HabilidadeBO {
 
@@ -109,6 +110,17 @@ class HabilidadeBO {
             let hab = await dao.obterHabilidade(habilidade);
 
             if (hab) {
+
+                let users = await daoUsuarioHab.obterUsuariosPorHabilidade(hab);
+                if(users.length > 0){
+                    return {
+                        error: true,
+                        status_code: 409,
+                        status_message: 'Integrity Failure',
+                        message: 'A habilidade não poderá ser excluída pois existem usuários com essa habilidade.'
+                    }
+                }
+
                 try {
                     await dao.excluirHabilidade(habilidade);
 
