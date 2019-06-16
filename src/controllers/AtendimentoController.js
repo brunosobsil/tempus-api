@@ -40,14 +40,16 @@ class AtendimentoController {
 
         // Define Atendimento
         let atendimento = new Atendimento(null, req.body.assunto, req.body.descricao, req.body.data_sugerida, null, habilidade, usuario);
-        let id = await AtendimentoBO.incluirAtendimento(atendimento);
+        atendimento = await AtendimentoBO.incluirAtendimento(atendimento);
 
-        res.status(201).json({
-            status: req.body.status,
-            message: 'atendimento inserido com sucesso',
-            id: id
-        });
+        let result;
+        if(atendimento.error) {
+            result = { error: atendimento.message };
+        } else {
+            result = { id: atendimento.body, status: req.body.status, message: atendimento.message };
+        }
 
+        res.status(atendimento.status_code).json(result);
     }
 
     async alterarAtendimento(req, res) {
@@ -63,28 +65,35 @@ class AtendimentoController {
         habilidade = await HabilidadeBO.obterHabilidade(habilidade);
 
         let atendimento = new Atendimento(req.params.id, req.body.assunto, req.body.descricao, req.body.data_sugerida, null, habilidade, usuario);
-        await AtendimentoBO.alterarAtendimento(atendimento);
+        atendimento = await AtendimentoBO.alterarAtendimento(atendimento);
 
-        res.status(200).json({
-            status: req.body.status,
-            message: 'atendimento atualizado com sucesso'
-        });
+        let result;
+        if(atendimento.error) {
+            result = { error: atendimento.message };
+        } else {
+            result = { id: atendimento.body, status: req.body.status, message: atendimento.message };
+        }
+
+        res.status(atendimento.status_code).json(result);
 
     }
 
     async excluirAtendimento(req, res) {
+        let atendimento = new Atendimento();
 
         if (req.params.id) {
-            let atendimento = new Atendimento();
             atendimento.id = req.params.id;
-            await AtendimentoBO.excluirAtendimento(atendimento);
+        }
+        atendimento = await AtendimentoBO.excluirAtendimento(atendimento);
 
-            res.status(200).json({
-                status: req.body.status,
-                message: 'atendimento excluido com sucesso.'
-            });
+        let result;
+        if(atendimento.error) {
+            result = { error: atendimento.message };
+        } else {
+            result = { status: req.body.status, message: atendimento.message };
         }
 
+        res.status(atendimento.status_code).json(result);
     }
 
 }
