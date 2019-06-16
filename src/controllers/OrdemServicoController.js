@@ -89,10 +89,7 @@ class OrdemServicoController {
             let agendamento = new Agendamento();
             agendamento.id = ordemServico.agendamento.id;
             agendamento = await AgendamentoBO.obterAgendamento(agendamento);
-
-            // Excluir ordem de servico
-            let ordemServico = new OrdemServico();
-            ordemServico.id = req.params.id;
+            
             await OrdemServicoBO.excluirOrdemServico(ordemServico);
 
             if(agendamento.atendimento.projeto){
