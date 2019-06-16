@@ -6,7 +6,7 @@ class ClienteController {
     async obterCliente(req, res) {
 
         if (req.params.id) {
-            // Obter cliente por ID 
+            // Obter cliente por ID
             let cliente = new Cliente();
             cliente.id = req.params.id;
             cliente = await ClienteBO.obterCliente(cliente);
