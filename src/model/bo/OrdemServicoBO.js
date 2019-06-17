@@ -27,6 +27,20 @@ class OrdemServicoBO {
             error.push('necessario informar o agendamento');
         }
 
+        if(! OrdemServico.dataHoraInicio){
+            error.push('necessario informar o data/hora inicio da os');
+        }
+
+        if(! OrdemServico.dataHoraFinal){
+            error.push('necessario informar o data/hora final da os');
+        }
+
+        if(OrdemServico.dataHoraInicio && OrdemServico.dataHoraFinal){
+            if(OrdemServico.dataHoraInicio > OrdemServico.dataHoraFinal){
+                error.push('Horario de inicio da OS nao pode ser maior que o horario final');
+            }
+        }
+
         if (error.length > 0) {
             return {
                 error: true,
@@ -69,6 +83,20 @@ class OrdemServicoBO {
                     }
                 } else {
                     error.push('necessario informar o agendamento');
+                }
+
+                if(! OrdemServico.dataHoraInicio){
+                    error.push('necessario informar o data/hora inicio da os');
+                }
+        
+                if(! OrdemServico.dataHoraFinal){
+                    error.push('necessario informar o data/hora final da os');
+                }
+        
+                if(OrdemServico.dataHoraInicio && OrdemServico.dataHoraFinal){
+                    if(OrdemServico.dataHoraInicio > OrdemServico.dataHoraFinal){
+                        error.push('Horario de inicio da OS nao pode ser maior que o horario final');
+                    }
                 }
 
                 if (error.length > 0) {
