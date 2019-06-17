@@ -34,6 +34,16 @@ class AgendamentoDAO {
         return agends;
     }
 
+    async obterAgendamentosPorAtendimento(atendimento) {
+        const agends = await Agendamento.findAll({
+            where: {
+                id_atendimento: atendimento.id
+            },
+            include: [{ all: true, nested: true }]
+        });
+        return agends;
+    }
+
     async verificarDisponibilidade(usuario, data_inicial, data_final) {
         const agends = await Agendamento.findOne({
             where: {

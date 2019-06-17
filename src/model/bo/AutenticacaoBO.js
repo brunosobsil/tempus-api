@@ -13,7 +13,7 @@ class AutenticacaoBO {
             if (user.length > 0) {
                 if (bcrypt.hashSync(usuario.senha, config.password_salt) === user[0].senha) {
                     var token = jwt.sign({
-                        exp: Math.floor(Date.now() / 1000) + (60 * 60),
+                        exp: Math.floor(Date.now() / 1000) + (60 * 24 * 60),
                         data: user[0].id,
                     }, config.jwt_hash);
 

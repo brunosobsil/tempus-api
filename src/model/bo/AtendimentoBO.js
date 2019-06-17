@@ -1,4 +1,5 @@
 const dao = require('../dao/AtendimentoDAO');
+const daoAgendamento = require('../dao/AgendamentoDAO');
 
 class AtendimentoBO {
 
@@ -132,6 +133,18 @@ class AtendimentoBO {
             let atend = await dao.obterAtendimento(atendimento);
 
             if (atend) {
+
+                let agen = await daoAgendamento.obterAgendamentosPorAtendimento(atend)
+
+                if(agen.length > 0){
+                    return {
+                        error: true,
+                        status_code: 409,
+                        status_message: 'Integrity Failure',
+                        message: 'Este atendimento está associado a um agendamento e não poderá ser excluído.'
+                    };
+                }
+
                 try {
                     dao.excluirAtendimento(atendimento);
 
