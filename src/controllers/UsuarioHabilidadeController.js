@@ -60,6 +60,8 @@ class UsuarioHabilidadeController {
         usuario = await UsuarioBO.obterUsuario(usuario);
 
         let habilidades = req.body.habilidades;
+        let usuHabilidade = null;
+        let usuHabs = null;
 
         for(let i = 0; i < habilidades.length; i++){
 
@@ -67,20 +69,20 @@ class UsuarioHabilidadeController {
             habilidade.id = habilidades[i].id;
             habilidade = await HabilidadeBO.obterHabilidade(habilidade);
 
-            let usuHabilidade = new UsuarioHabilidade(habilidades[i].nivel, usuario, habilidade);
-            let usuHabs = await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
+            usuHabilidade = new UsuarioHabilidade(habilidades[i].nivel, usuario, habilidade);
+            usuHabs = await UsuarioHabilidadeBO.incluirUsuarioHabilidade(usuHabilidade);
 
         }
 
         let result;
 
-        if(usuHabilidade.error) {
-            result = { error: usuHabilidade.message };
+        if(usuHabs.error) {
+            result = { error: usuHabs.message };
         } else {
-            result = { status: req.body.status, message: usuHabilidade.message };
+            result = { status: req.body.status, message: usuHabs.message };
         }
 
-        res.status(usuHabilidade.status_code).json(result);
+        res.status(usuHabs.status_code).json(result);
 
     }
 

@@ -11,6 +11,15 @@ class AutenticacaoBO {
             let user = await dao.obterUsuariosPorEmail(usuario);
 
             if (user.length > 0) {
+
+                if(! user[0].status){
+                    return {
+                        status_code: 401,
+                        status_message: 'Unauthorized',
+                        message: 'Usuário bloqueado'
+                    };
+                }
+
                 if (bcrypt.hashSync(usuario.senha, config.password_salt) === user[0].senha) {
                     var token = jwt.sign({
                         exp: Math.floor(Date.now() / 1000) + (60 * 24 * 60),
