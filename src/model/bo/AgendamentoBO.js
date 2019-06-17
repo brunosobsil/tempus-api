@@ -18,11 +18,11 @@ class AgendamentoBO {
         const error = new Array();
 
         let agend = await dao.obterAgendamento(agendamento);
-        let hoje = new Date().toUTCString();
-
+        
+        /* let hoje = new Date().toUTCString();
         if (agendamento.data_hora_agendamento < hoje) {
             error.push('Não é possível agendar para datas passadas');
-        }
+        } */
 
         if (agendamento.usuario) {
             if (agendamento.usuario.id == null) {
@@ -76,13 +76,13 @@ class AgendamentoBO {
 
         if (agendamento.id) {
             let agend = await dao.obterAgendamento(agendamento);
-            let hoje = new Date().toUTCString();
-
+            
             if (agend != null) {
+
+                /*let hoje = new Date().toUTCString();
                 if (agendamento.data_hora_agendamento < hoje) {
                     error.push('Não é possível agendar para datas passadas');
-                }
-
+                } */
                 if (agendamento.usuario) {
                     if (agendamento.usuario.id == null) {
                         error.push('necessario informar o id do usuario');
