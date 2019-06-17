@@ -30,14 +30,19 @@ class ProjetoController {
         atendimento.id = req.body.atendimento.id;
         atendimento = await AtendimentoBO.obterAtendimento(atendimento);
 
+        // Define projeto por ID
         let projeto = new Projeto(null, req.body.nome, req.body.descricao_atividades, req.body.horas_estimadas, req.body.horas_realizadas, atendimento);
-        let id = await ProjetoBO.incluirProjeto(projeto);
-        
-        res.status(201).json({
-            status: req.body.status,
-            message: 'projeto inserido com sucesso',
-            id: id
-        });
+        projeto = await ProjetoBO.incluirProjeto(projeto);
+
+        let result;
+
+        if(projeto.error) {
+            result = { error: projeto.message }
+        } else {
+            result = { id: projeto.body, status: req.body.status, message: projeto.message }
+        }
+
+        res.status(projeto.status_code).json(result);
 
     }
 
@@ -48,28 +53,39 @@ class ProjetoController {
         atendimento.id = req.body.atendimento.id;
         atendimento = await AtendimentoBO.obterAtendimento(atendimento);
 
+        // Define projeto por ID
         let projeto = new Projeto(req.params.id, req.body.nome, req.body.descricao_atividades, req.body.horas_estimadas, req.body.horas_realizadas, atendimento);
-        await ProjetoBO.alterarProjeto(projeto);
+        projeto = await ProjetoBO.alterarProjeto(projeto);
 
-        res.status(200).json({
-            status: req.body.status,
-            message: 'projeto atualizado com sucesso'
-        });
+        let result;
+
+        if(projeto.error) {
+            result = { error: projeto.message }
+        } else {
+            result = { status: req.body.status, message: projeto.message }
+        }
+
+        res.status(projeto.status_code).json(result);
 
     }
 
     async excluirProjeto(req, res) {
+        let projeto = new Projeto();
+        let result;
 
         if (req.params.id) {
-            let projeto = new Projeto();
             projeto.id = req.params.id;
-            await ProjetoBO.excluirProjeto(projeto);
-            res.status(200).json({
-                status: req.body.status,
-                message: 'projeto excluido com sucesso.'
-            });
-
         }
+
+        projeto = await ProjetoBO.excluirProjeto(projeto);
+
+        if(projeto.error) {
+            result = { error: projeto.message }
+        } else {
+            result = { status: req.body.status, message: projeto.message }
+        }
+
+        res.status(projeto.status_code).json(result);
 
     }
 
