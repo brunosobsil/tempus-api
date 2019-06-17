@@ -25,10 +25,11 @@ class ClienteBO {
             if(cli.some(item => item.cnpj === cliente.cnpj)){
                 error.push('já existe um cliente com esse cnpj');
             }
+            
+        }
 
-            if(!cnpj.isValid(cliente.cnpj)) {
-                error.push('CNPJ inválido');
-            }
+        if(!cnpj.isValid(cliente.cnpj)) {
+            error.push('CNPJ inválido');
         }
 
         if (error.length > 0) {
