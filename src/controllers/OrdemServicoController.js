@@ -45,11 +45,14 @@ class OrdemServicoController {
             await ProjetoBO.calcularHorasProjeto(projeto);
         }
 
-        res.status(201).json({
-            status: req.body.status,
-            message: 'ordem de servico inserida com sucesso',
-            id: ordemServico
-        });
+        let result;
+        if(ordemServico.error) {
+            result = { error: ordemServico.message };
+        } else {
+            result = { id: ordemServico.body, status: req.body.status, message: ordemServico.message };
+        }
+
+        res.status(ordemServico.status_code).json(result);
 
     }
 
@@ -61,7 +64,7 @@ class OrdemServicoController {
         agendamento = await AgendamentoBO.obterAgendamento(agendamento);
 
         let ordemServico = new OrdemServico(req.params.id, req.body.status, req.body.descricao, req.body.data_hora_inicio, req.body.data_hora_final, agendamento);
-        await OrdemServicoBO.alterarOrdemServico(ordemServico);
+        ordemServico = await OrdemServicoBO.alterarOrdemServico(ordemServico);
 
         if(agendamento.atendimento.projeto){
             // Atualiza horas do projeto
@@ -70,10 +73,14 @@ class OrdemServicoController {
             await ProjetoBO.calcularHorasProjeto(projeto);
         }
 
-        res.status(200).json({
-            status: req.body.status,
-            message: 'ordem de servico atualizada com sucesso'
-        });
+        let result;
+        if(ordemServico.error) {
+            result = { error: ordemServico.message };
+        } else {
+            result = { id: ordemServico.body, status: req.body.status, message: ordemServico.message };
+        }
+
+        res.status(ordemServico.status_code).json(result);
 
     }
 
@@ -90,7 +97,7 @@ class OrdemServicoController {
             agendamento.id = ordemServico.agendamento.id;
             agendamento = await AgendamentoBO.obterAgendamento(agendamento);
             
-            await OrdemServicoBO.excluirOrdemServico(ordemServico);
+            ordemServico = await OrdemServicoBO.excluirOrdemServico(ordemServico);
 
             if(agendamento.atendimento.projeto){
                 // Atualizar horas do projeto
@@ -99,10 +106,14 @@ class OrdemServicoController {
                 await ProjetoBO.calcularHorasProjeto(projeto);
             }
 
-            res.status(200).json({
-                status: req.body.status,
-                message: 'ordem de servico excluida com sucesso.'
-            });
+            let result;
+            if(ordemServico.error) {
+                result = { error: ordemServico.message };
+            } else {
+                result = { id: ordemServico.body, status: req.body.status, message: ordemServico.message };
+            }
+
+            res.status(ordemServico.status_code).json(result);
 
         }
 
