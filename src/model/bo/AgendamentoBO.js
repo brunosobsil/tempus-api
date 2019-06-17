@@ -1,4 +1,5 @@
 const dao = require('../dao/AgendamentoDAO');
+const daoOS = require('../dao/OrdemServicoDAO');
 
 class AgendamentoBO {
     
@@ -107,6 +108,17 @@ class AgendamentoBO {
                         message: error
                     }
                 } else {
+
+                    let os = await daoOS.obterOrdemServicoAgendamento(agend);
+                    if (os.length > 0){
+                        return {
+                            error: true,
+                            status_code: 409,
+                            status_message: 'Integrity Failure',
+                            message: 'Existem Ordens de Serviço associadas a esse agendamento. Não será possível alterar.'
+                        };
+                    }
+
                     try {
                         dao.alterarAgendamento(agendamento);
 
@@ -149,6 +161,17 @@ class AgendamentoBO {
             let agend = await dao.obterAgendamento(agendamento);
 
             if (agend) {
+
+                let os = await daoOS.obterOrdemServicoAgendamento(agend);
+                if (os.length > 0){
+                    return {
+                        error: true,
+                        status_code: 409,
+                        status_message: 'Integrity Failure',
+                        message: 'Existem Ordens de Serviço associadas a esse agendamento. Não será possível excluir.'
+                    };
+                }
+
                 try {
                     await dao.excluirAgendamento(agendamento);
 

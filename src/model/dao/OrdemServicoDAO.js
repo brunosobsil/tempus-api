@@ -34,6 +34,16 @@ class OrdemServicoDAO {
         return newOSs;
     }
 
+    async obterOrdemServicoAgendamento(agendamento) {
+        const newOSs = await OrdemServico.findAll({
+            include: [{model: Agendamento, as: 'agendamento'}],
+            where: {
+                id_agendamento: agendamento.id
+            }
+        });
+        return newOSs;
+    }
+
     async incluirOrdemServico(ordemServico) {
         let newOS = await OrdemServico.create({
             descricao: ordemServico.descricao,
