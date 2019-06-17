@@ -23,12 +23,12 @@ class Agendamento {
         this._data_hora_agendamento = data_hora_agendamento;
     }
 
-    get dataExclusao() {
-        return this._dataExclusao;
+    get data_exclusao() {
+        return this._data_exclusao;
     }
 
-    set dataExclusao(dataExclusao) {
-        this._dataExclusao = dataExclusao;
+    set data_exclusao(data_exclusao) {
+        this._data_exclusao = data_exclusao;
     }
 
     get atendimento() {

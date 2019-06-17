@@ -42,23 +42,30 @@ class AgendamentoController {
 
         // Obter usuario por ID
         let usuario = new Usuario();
-        usuario.id = req.body.usuario.id;
-        usuario = await UsuarioBO.obterUsuario(usuario);
+        if (req.body.atendimento) {
+            usuario.id = req.body.usuario.id;
+            usuario = await UsuarioBO.obterUsuario(usuario);
+        }
 
         // Obter atendimento por ID
         let atendimento = new Atendimento();
-        atendimento.id = req.body.atendimento.id;
-        atendimento = await AtendimentoBO.obterAtendimento(atendimento);
+        if (req.body.atendimento) {
+            atendimento.id = req.body.atendimento.id;
+            atendimento = await AtendimentoBO.obterAtendimento(atendimento);
+        }
 
         let agendamento = new Agendamento(null, req.body.data_hora_agendamento, atendimento, usuario);
-        let id = await AgendamentoBO.incluirAgendamento(agendamento);
+        agendamento = await AgendamentoBO.incluirAgendamento(agendamento);
 
-        res.status(201).json({
-            status: req.body.status,
-            message: 'agendamento inserido com sucesso',
-            id: id
-        });
+        let result;
 
+        if(agendamento.error) {
+            result = { error: agendamento.message }
+        } else {
+            result = { id: agendamento.body, status: req.body.status, message: agendamento.message }
+        }
+
+        res.status(agendamento.status_code).json(result);
     }
 
     async alterarAgendamento(req, res) {
@@ -74,28 +81,38 @@ class AgendamentoController {
         atendimento = await AtendimentoBO.obterAtendimento(atendimento);
 
         let agendamento = new Agendamento(req.params.id, req.body.data_hora_agendamento, atendimento, usuario);
-        await AgendamentoBO.alterarAgendamento(agendamento);
+        agendamento = await AgendamentoBO.alterarAgendamento(agendamento);
 
-        res.status(200).json({
-            status: req.body.status,
-            message: 'agendamento atualizado com sucesso'
-        });
+        let result;
+
+        if(agendamento.error) {
+            result = { error: agendamento.message }
+        } else {
+            result = { status: req.body.status, message: agendamento.message }
+        }
+
+        res.status(agendamento.status_code).json(result);
 
     }
 
     async excluirAgendamento(req, res) {
 
-        if (req.params.id) {
-            let agendamento = new Agendamento();
-            agendamento.id = req.params.id;
-            await AgendamentoBO.excluirAgendamento(agendamento);
+        let agendamento = new Agendamento();
+        let result;
 
-            res.status(200).json({
-                status: req.body.status,
-                message: 'agendamento excluido com sucesso.'
-            });
+        if (req.params.id) {
+            agendamento.id = req.params.id;
+        }
+        
+        agendamento = await AgendamentoBO.excluirAgendamento(agendamento);
+
+        if(agendamento.error) {
+            result = { error: agendamento.message }
+        } else {
+            result = { status: req.body.status, message: agendamento.message }
         }
 
+        res.status(agendamento.status_code).json(result);
     }
 
     async verificarDisponibilidade(req, res) {
